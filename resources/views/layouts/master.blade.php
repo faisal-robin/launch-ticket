@@ -187,6 +187,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a href="{{url('admin/launches')}}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Launch
+                                            </p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="{{url('admin/categories')}}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Category
+                                            </p>
+                                        </a>
+                                    </li>
+
                                     <li class="nav-item">
                                         <a href="{{url('admin/types')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>

@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Route;
 // Auth::routes();
 
 Auth::routes([
-    'register' => true, // Registration Routes...
+    'register' => false, // Registration Routes...
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/{any}', 'HomeController@category_product')->name('home');
+// Route::get('/{any}', 'HomeController@category_product')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('category-product/{any}', 'Admin\ProductController@category_product')->middleware('auth');
 
@@ -47,7 +47,6 @@ Route::group(['middleware' => 'customer_authenticate'], function() {
 // admin routes
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
-    Route::get('get-products', 'Admin\DashboardController@get_products');
     //Vendors
     Route::post('vendor-list', 'Admin\VendorController@vendor_list');
     Route::resource('vendors', 'Admin\VendorController');
@@ -64,35 +63,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     //Custom Field
     Route::resource('custom-fields', 'Admin\CustomFieldController');
     Route::post('change-fields-status/{id}', 'Admin\CustomFieldController@change_status');
+    //Launch
+    Route::resource('launches', 'Admin\LaunchController');
     //Categories
     Route::resource('categories', 'Admin\CategoryController');
-    //Brand
-    Route::resource('brands', 'Admin\BrandController');
     //Sliders
     Route::resource('sliders', 'Admin\SliderController');
-    //Attributes
-    Route::resource('attributes', 'Admin\AttributeController');
-    //Get Attribute Group By Id
-    Route::post('fetch-attribute-group/{any}', 'Admin\AttributeController@fetch_attribute_group');
-    //Delete Attribute  By Id
-    Route::delete('delete-attribute/{any}', 'Admin\AttributeController@delete_attribute');
-    //update Attribute By Id
-    Route::post('attributes-update/{any}', 'Admin\AttributeController@attributes_update');   
-    //Upload Summernote Image
-    Route::post('summurnote-image-upload', 'Admin\AttributeController@summurnote_image_upload');
-    //products
-    Route::resource('products', 'Admin\ProductController');
-    Route::resource('trending_products', 'Admin\TrendingProductController');
-    Route::resource('special_products', 'Admin\SpecialProductController');
-    Route::resource('flash_sale_products', 'Admin\FlashSaleController');
-    Route::post('products/upload', 'Admin\ProductController@upload')->name('products.upload');
-    //orders
-    Route::resource('orders', 'Admin\OrderController');
-    Route::get('order-pdf/{any}', 'Admin\OrderController@generate_pdf');
     //Types
     Route::resource('types', 'Admin\TypeController');
-    //Units
-    Route::resource('units', 'Admin\UnitController');
     //Company
     Route::get('company', 'Admin\AdminController@index');
     Route::post('edit-company-data', 'Admin\AdminController@edit_company_data');
