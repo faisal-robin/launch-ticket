@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\File;
+//use Faker\Provider\Image;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use App\Models\launch;
 use Illuminate\Http\Request;
 
@@ -47,6 +50,13 @@ class LaunchController extends Controller
 
         $launch->launch_name = $request->launch_name;
         $launch->launch_price_range = $request->launch_price_range;
+        $launch->launch_description = $request->launch_description;
+
+        $file = $request->file('launch_image')->hashName();
+        $resize = Image::make($request->file('launch_image'))->resize(600, 200, function ($constraint) {})->encode('jpg');
+        Storage::put("launch/{$file}", $resize->__toString());
+        $launch->launch_image = 'launch/' . $file;
+
         $launch->save();
     }
 
@@ -87,16 +97,22 @@ class LaunchController extends Controller
 
         $request->validate([
             'launch_name' => 'required',
-            'launch_section' => 'required',
+            'launch_price_range' => 'required',
         ]);
 
         $launch->launch_name = $request->launch_name;
-        $launch->launch_section = $request->launch_section;
-    
-        //echo "<pre>";print_r($launch);die();
-        $launch->save();
+        $launch->launch_price_range = $request->launch_price_range;
+        $launch->launch_description = $request->launch_description;
+        
+        if ($request->hasFile('launch_image')) {
+            if (File::exists('storage/app/' . $launch->launch_image)) {
+                File::delete('storage/app/' . $launch->launch_image);
+            }
+            $photo = $request->file('launch_image')->store('launch');
+            $launch->launch_image = $photo;
+        }
 
-        //return redirect('admin/teacher/index');
+        $launch->save();
     }
 
     /**
