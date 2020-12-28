@@ -198,6 +198,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </li>
 
                                     <li class="nav-item">
+                                        <a href="{{url('admin/terminals')}}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Terminal
+                                            </p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
                                         <a href="{{url('admin/categories')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
@@ -214,6 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </p>
                                         </a>
                                     </li>
+
                                     <li class="nav-item">
                                         <a href="{{url('admin/custom-fields')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
@@ -234,11 +244,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </ul>
                             </li>
                             @endif
-                    
+
 
                             <li class="nav-item">
                                 <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                                   document.getElementById('logout-form').submit();">
                                     <i class="nav-icon fas fa-sign-out-alt"></i>
                                     <p>
                                         {{ __('Logout') }}
@@ -329,99 +339,98 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="{{ asset('public/admin_asset/js/summernote-bs4.min.js') }}" type="text/javascript"></script>
 
         <script>
-                                    $(document).ready(function() {
-                                    $('.select2').select2();
-                                    $('.datepicker').datetimepicker({
-                                    format: 'YYYY-MM-DD'
-                                    });
-                                    $('.timepicker').datetimepicker({
-                                    format: 'LT',
-                                            icons: {
-                                            up: 'fa fa-angle-up',
-                                                    down: 'fa fa-angle-down'
-                                            },
-                                    });
-                                    $('#summernote').summernote({
-                                    placeholder: 'Hello Bootstrap 4',
-                                            tabsize: 2,
-                                            height: 100,
-                                            callbacks: {
-                                            onImageUpload: function(files) {
-                                            for (let i = 0; i < files.length; i++) {
-                                            $.upload(files[i]);
-                                            }
-                                            }
-                                            },
-                                    });
-                                    $('#summernote1').summernote({
-                                    placeholder: 'Hello Bootstrap 4',
-                                            tabsize: 2,
-                                            height: 100,
-                                            callbacks: {
-                                            onImageUpload: function(files) {
-                                            for (let i = 0; i < files.length; i++) {
-                                            $.upload(files[i]);
-                                            }
-                                            }
-                                            },
-                                    });
-                                    });                                  
-                                    $.upload = function (file) {
-                                    let out = new FormData();
-                                    out.append('file', file, file.name);
-                                    let image = file.name;
-                                    console.log(file.name);
-                                    $.ajax({
-                                    headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                            method: 'POST',
-                                            url: '{{url('summurnote-image-upload')}}',
-                                            contentType: false,
-                                            cache: false,
-                                            processData: false,
-                                            data: out,
-                                            success: function (img) {
-                                            var image = $('<img>').attr('src', img);
-                                            console.log(image);
-                                            $('#summernote').summernote('insertNode', image[0]);
-                                            },
-                                            error: function (jqXHR, textStatus, errorThrown) {
-                                            console.error(textStatus + " " + errorThrown);
-                                            }
-                                    });
-                                    };
-
-                                    $.upload = function (file) {
-                                    let out = new FormData();
-                                    out.append('file', file, file.name);
-                                    let image = file.name;
-                                    console.log(file.name);
-                                    $.ajax({
-                                    headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                            method: 'POST',
-                                            url: '{{url('summurnote-image-upload')}}',
-                                            contentType: false,
-                                            cache: false,
-                                            processData: false,
-                                            data: out,
-                                            success: function (img) {
-                                            var image = $('<img>').attr('src', img);
-                                            console.log(image);
-                                            $('#summernote1').summernote('insertNode', image[0]);
-                                            },
-                                            error: function (jqXHR, textStatus, errorThrown) {
-                                            console.error(textStatus + " " + errorThrown);
-                                            }
-                                    });
-                                    };
-                                    $('#example1').DataTable();
-                                    //Timepicker
-                                    $('.timepicker').timepicker({
-                                      showInputs: false
-                                    })
+$(document).ready(function() {
+$('.select2').select2();
+$('.datepicker').datetimepicker({
+format: 'YYYY-MM-DD'
+        });
+$('.timepicker').datetimepicker({
+format: 'LT',
+        icons: {
+        up: 'fa fa-angle-up',
+                down: 'fa fa-angle-down'
+        },
+        });
+$('#summernote').summernote({
+placeholder: 'Hello Bootstrap 4',
+        tabsize: 2,
+        height: 100,
+        callbacks: {
+        onImageUpload: function(files) {
+        for (let i = 0; i < files.length; i++) {
+        $.upload(files[i]);
+        }
+        }
+        },
+        });
+$('#summernote1').summernote({
+placeholder: 'Hello Bootstrap 4',
+        tabsize: 2,
+        height: 100,
+        callbacks: {
+        onImageUpload: function(files) {
+        for (let i = 0; i < files.length; i++) {
+        $.upload(files[i]);
+        }
+        }
+        },
+        });
+});
+$.upload = function (file) {
+let out = new FormData();
+out.append('file', file, file.name);
+let image = file.name;
+console.log(file.name);
+$.ajax({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: '{{url('summurnote - image - upload')}}',
+        contentType: false,
+        cache: false,
+        processData: false,
+        data: out,
+        success: function (img) {
+        var image = $('<img>').attr('src', img);
+        console.log(image);
+        $('#summernote').summernote('insertNode', image[0]);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        console.error(textStatus + " " + errorThrown);
+        }
+});
+};
+$.upload = function (file) {
+let out = new FormData();
+out.append('file', file, file.name);
+let image = file.name;
+console.log(file.name);
+$.ajax({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: '{{url('summurnote - image - upload')}}',
+        contentType: false,
+        cache: false,
+        processData: false,
+        data: out,
+        success: function (img) {
+        var image = $('<img>').attr('src', img);
+        console.log(image);
+        $('#summernote1').summernote('insertNode', image[0]);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        console.error(textStatus + " " + errorThrown);
+        }
+});
+};
+$('#example1').DataTable();
+//Timepicker
+$('.timepicker').timepicker({
+showInputs: false
+        })
         </script>
     </body>
 </html>

@@ -31,3 +31,5 @@
     <link rel="stylesheet" href="{{asset('public')}}/frontend_asset/css/style.css">
     <!--Responsive css-->
     <link rel="stylesheet" href="{{asset('public')}}/frontend_asset/css/responsive.css">
+    
+    <link rel="stylesheet" href="{{ asset('public/frontend_asset/css/jquery-ui.css') }}">
