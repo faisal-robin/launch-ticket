@@ -16,6 +16,7 @@
                 <thead>
                     <tr>
                         <th>Sl</th>
+                        <th>Launch Image</th>
                         <th>Launch Name</th>
                         <th>Launch Price Range</th>
                         <th>Launch Status</th>
@@ -27,6 +28,7 @@
                     @foreach($launch_list  as $key => $value)
                     <tr>
                         <td>{{$key + 1}}</td>
+                        <td><img  src="{{ asset("storage/app/".$value->launch_image) }}" alt="launch image" style="width: 80px;height:50px"></td>
                         <td>{{$value->launch_name}}</td>
                         <td>{{$value->launch_price_range}}</td>
                         <td>{{$value->launch_status}}</td>
@@ -39,7 +41,6 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
-
                         </td>
                     </tr>
                     @endforeach
@@ -72,15 +73,20 @@
                         <input  type="text" class="form-control mb-4" name="launch_name" id="launch_name" placeholder="launch Name">
                     </div>
 
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <label for="launch_image">Launch Image</label>
                         <input type="file" id="launch_image" name="launch_image" class="form-control" >
-                    </div> -->
+                    </div>
 
                     <div class="form-group">
                         <label for="launch_price_range">Launch Price Range</label>
-                        <input  type="text" class="form-control mb-4" name="launch_price_range" id="launch_price_range" placeholder="Launch Price Range">
-                    </div>              
+                        <input  type="text" class="form-control mb-4" name="launch_price_range" id="launch_price_range" placeholder="500 - 5000">
+                    </div>    
+
+                    <div class="form-group">
+                        <label for="launch_description">Launch Description</label>
+                        <input  type="text" class="form-control mb-4" name="launch_description" id="launch_description" placeholder="Launch Description">
+                    </div>           
                 </div>
 
                 <div class="modal-footer">
@@ -160,7 +166,7 @@
 
         $.ajax({
             method: "GET",
-            url: "launchs/" + id + "/edit",
+            url: "launches/" + id + "/edit",
             data: id,
             cache: false,
             contentType: false,
@@ -188,7 +194,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "launchs/" + id,
+            url: "launches/" + id,
             data: data,
             cache: false,
             contentType: false,

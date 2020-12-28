@@ -65,6 +65,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('change-fields-status/{id}', 'Admin\CustomFieldController@change_status');
     //Launch
     Route::resource('launches', 'Admin\LaunchController');
+    //Room
+    Route::resource('rooms', 'Admin\RoomController');
     //Categories
     Route::resource('categories', 'Admin\CategoryController');
     //Sliders

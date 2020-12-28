@@ -137,6 +137,7 @@ class CategoryController extends Controller {
         $category->category_name = $request->category_name;
         $category->slug = $request->category_slug;
         $category->parent_id = $request->parent_id;
+
         if ($request->hasFile('category_cover_image')) {
             if (File::exists('storage/app/category/' . $category->category_cover_image)) {
                 File::delete('storage/app/category/' . $category->category_cover_image);
@@ -153,6 +154,7 @@ class CategoryController extends Controller {
             Storage::put("category/category_thumbnail/{$file}", $resize->__toString());
             $category->category_thumbnail = 'category/category_thumbnail/' . $file;
         }
+        
         if ($request->hasFile('category_menu_image')) {
             if (File::exists('storage/app/category/' . $category->category_menu_image)) {
                 File::delete('storage/app/category/' . $category->category_menu_image);

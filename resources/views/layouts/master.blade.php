@@ -198,10 +198,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </li>
 
                                     <li class="nav-item">
+                                        <a href="{{url('admin/rooms')}}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Room
+                                            </p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
                                         <a href="{{url('admin/categories')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                Category
+                                               Room Category
                                             </p>
                                         </a>
                                     </li>
