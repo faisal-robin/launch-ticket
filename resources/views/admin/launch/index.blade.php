@@ -81,7 +81,17 @@
                     <div class="form-group">
                         <label for="launch_price_range">Launch Price Range</label>
                         <input  type="text" class="form-control mb-4" name="launch_price_range" id="launch_price_range" placeholder="500 - 5000">
-                    </div>    
+                    </div> 
+                    
+                    <!-- <div class="form-group">
+                        <label for="launch_price_range">From</label>
+                        <input  type="text" class="form-control mb-4" name="launch_price_range" id="launch_price_range" placeholder="500 - 5000">
+                    </div> 
+                         
+                    <div class="form-group">
+                        <label for="launch_price_range">To</label>
+                        <input  type="text" class="form-control mb-4" name="launch_price_range" id="launch_price_range" placeholder="500 - 5000">
+                    </div>  -->
 
                     <div class="form-group">
                         <label for="launch_description">Launch Description</label>
