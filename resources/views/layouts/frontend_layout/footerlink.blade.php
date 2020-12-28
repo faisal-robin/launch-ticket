@@ -1,6 +1,8 @@
     <!--Jquery js-->
     <script src="{{asset('public')}}/frontend_asset/js/jquery.min.js"></script>
+    <script src="{{ asset('public/frontend_asset/js/jquery-ui.min.js') }}"></script>
     <!-- Popper JS -->
+    
     <script src="{{asset('public')}}/frontend_asset/js/popper.min.js"></script>
     <!--Bootstrap js-->
     <script src="{{asset('public')}}/frontend_asset/js/bootstrap.min.js"></script>
@@ -63,8 +65,80 @@
     </script> -->
 
     <script>
+          // CSRF Token
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+         $(document).ready(function () {
+        //get country
+        $("#search_departure").autocomplete({
+            source: function (request, response) {
+                // Fetch data
+                $.ajax({
+                    url: "{{ url('get_terminal') }}",
+                    type: 'get',
+                    dataType: "json",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        search: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                        console.log(data);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                if($('#search_arrival').val() !== ui.item.label){
+                   // Set selection
+                $(this).val(ui.item.label); // display the selected text
+                $('#source_id').val(ui.item.value); // save selected id to input
+                return false;  
+                }else{
+                    alert('Terminal already selected!');
+                     $(this).val(""); // display the selected text
+                     $('#source_id').val(""); // save selected id to input
+                     return false;     
+                }
+               
+            }
+        });
+        $("#search_arrival").autocomplete({
+            source: function (request, response) {
+                // Fetch data
+                $.ajax({
+                    url: "{{ url('get_terminal') }}",
+                    type: 'get',
+                    dataType: "json",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        search: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                        console.log(data);
+                    }
+                });
+            },
+            select: function (event, ui) {
+             if($('#search_departure').val() !== ui.item.label){
+                   // Set selection
+                $(this).val(ui.item.label); // display the selected text
+                $('#source_id').val(ui.item.value); // save selected id to input
+                return false;  
+                }else{
+                    alert('Terminal already selected!');
+                     $(this).val(""); // display the selected text
+                     $('#source_id').val(""); // save selected id to input
+                     return false;     
+                }
+            }
+        });
+
+    
+         });
+        
         function onChangeCallback(ctr){
             console.log("The country was changed: " + ctr);
             //$("#selectionSpan").text(ctr);
         }
+        
     </script>

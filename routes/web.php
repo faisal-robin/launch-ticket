@@ -73,6 +73,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('sliders', 'Admin\SliderController');
     //Types
     Route::resource('types', 'Admin\TypeController');
+    //Terminal
+    Route::resource('terminals', 'Admin\TerminalController');
     //Company
     Route::get('company', 'Admin\AdminController@index');
     Route::post('edit-company-data', 'Admin\AdminController@edit_company_data');
@@ -92,4 +94,6 @@ Route::group(['prefix' => 'cart'], function() {
 });
 //Route::get('product_info/{any}', ['as' => 'product_slug', 'jdytk' => 'HomeController@product_details']);
 Route::get('product/{any}', 'HomeController@product_details');
+
+Route::get('get_terminal', 'HomeController@get_terminal');
 

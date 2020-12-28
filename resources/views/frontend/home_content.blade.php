@@ -7,16 +7,12 @@
 <!-- Slider Area Start -->
 <section class="abh-slider-area overlay">
     <div class="abh-slide owl-carousel">
-
-        
-        <div class="slider-container slider-1">
-            <div class="single-slider zoom">
-            </div>
+        @foreach($all_slider as $v_slider)
+        <div class="slider-container">           
+            <div class="single-slider zoom" style="background: url({{asset('storage/app/'.$v_slider->slider_image)}});">
+            </div>         
         </div>
-        <div class="slider-container slider-2">
-            <div class="single-slider zoom">
-            </div>
-        </div>
+        @endforeach
         <!-- <div class="slider-container slider-3">
             <div class="single-slider zoom">
             </div>
@@ -53,7 +49,7 @@
                                     <ul class="nav nav-tabs search-top" role="tablist" id="searchTab">
                                         <li role="presentation" class="text-center">
                                             <a class="active show" href="#launch" aria-controls="launch" role="tab"
-                                                data-toggle="tab">
+                                               data-toggle="tab">
                                                 <i class="fa fa-ship"></i>
                                                 <span>launchS</SPAN>
                                             </a>
@@ -85,20 +81,13 @@
 
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <label>Departure From</label><br>
-                                                        <select class="selectpicker">
-                                                            <option>Select Launch Terminal</option>
-                                                            <option>Dhaka</option>
-                                                            <option>Barishal</option>
-                                                        </select>
+                                                         <input id="search_departure" type="text" class="form-control" placeholder="Where to source...">
+                                                         <input id="search_departure_id" type="hidden" class="form-control" placeholder="Where to source...">
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <label>Arrival At</label><br>
-                                                        <select class="selectpicker">
-                                                            <option>Select Launch Terminal</option>
-                                                            <option>Dhaka</option>
-                                                            <option>Barishal</option>
-                                                        </select>
+                                                         <input id="search_arrival" type="text" class="form-control" placeholder="Where to source...">
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
@@ -106,8 +95,8 @@
                                                         <div class="input-group">
 
                                                             <input id="departure_date" name="departure_date"
-                                                                class="form-control" placeholder="DD/MM/YY"
-                                                                data-select="datepicker" type="text">
+                                                                   class="form-control" placeholder="DD/MM/YY"
+                                                                   data-select="datepicker" type="text">
                                                             <span class="input-group-addon"><i
                                                                     class="fa fa-calendar fa-fw"></i></span>
                                                         </div>
@@ -115,7 +104,7 @@
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <a href="search-result.php" type="submit"
-                                                            class="search-button btn transition-effect">Search
+                                                           class="search-button btn transition-effect">Search
                                                             launchs
                                                         </a>
                                                     </div>
