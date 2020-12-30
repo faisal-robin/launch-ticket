@@ -67,6 +67,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('launches', 'Admin\LaunchController');
     //Room
     Route::resource('rooms', 'Admin\RoomController');
+    Route::get('get-rooms', 'Admin\RoomController@get_rooms');
     // schedule 
     Route::resource('launch-schedules', 'Admin\LaunchScheduleController');
     //Categories

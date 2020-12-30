@@ -83,6 +83,7 @@
                         <label for="customer_postal_code">Postal Code</label>
                         <input id="customer_postal_code" class="form-control" name="customer_postal_code">
                     </div>
+                    
                     <div class="form-group col-md-6">
                         <label for="customer_code">Code</label>                     
                         <input type="text" class="form-control" name="customer_code" id="customer_code" value="#customer-code123" placeholder="Customer Name">

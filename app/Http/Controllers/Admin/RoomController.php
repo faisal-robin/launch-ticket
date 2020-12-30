@@ -200,4 +200,23 @@ class RoomController extends Controller {
         return redirect('admin/rooms');
     }
 
+    public function get_rooms(Request $request)
+    {
+        $search = $request->search;
+        $id =$request->id;
+
+        if($search == ''){
+           $get_room = Room::orderby('room_no','asc')->select('id','room_no')->where('launch_id',$id)->limit(5)->get();
+        }else{
+           $get_room = Room::orderby('room_no','asc')->select('id','room_no')->where('room_no', 'like', '%' .$search . '%')->where('launch_id',$id)->limit(15)->get();
+        }
+
+       $response = array();
+        foreach($get_room as $room){
+           $response[] = array("value"=>$room->id,"label"=>$room->room_no);
+        }
+
+       return response()->json($response);
+    }
+
 }

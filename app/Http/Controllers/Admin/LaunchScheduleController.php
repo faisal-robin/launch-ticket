@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\LaunchSchedule;
-use App\Models\launch;
+use App\Models\Launch;
+use App\Models\Terminal;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
 
 class LaunchScheduleController extends Controller
 {
@@ -31,6 +34,8 @@ class LaunchScheduleController extends Controller
     public function create()
     {
         $data['launch_list'] = Launch::all();
+        $data['terminal_list'] = Terminal::all();
+        // echo "<pre>";print_r($data['launch_list']);die();
         return view('admin.launch_schedule.add_launch_schedule',$data);
     }
 
@@ -44,22 +49,34 @@ class LaunchScheduleController extends Controller
     {
 
         $request->validate([
-            'launch_schedule_name' => 'required',
-            'launch_schedule_price_range' => 'required',
+            'launch' => 'required',
+            'terminal_from' => 'required',
+            'terminal_to' => 'required',
+            'schedule_date' => 'required',
+            'schedule_time' => 'required',
         ]);
 
         $launch_schedule = new LaunchSchedule;
 
-        $launch_schedule->launch_schedule_name = $request->launch_schedule_name;
-        $launch_schedule->launch_schedule_price_range = $request->launch_schedule_price_range;
-        $launch_schedule->launch_schedule_description = $request->launch_schedule_description;
-
-        $file = $request->file('launch_schedule_image')->hashName();
-        $resize = Image::make($request->file('launch_schedule_image'))->resize(600, 200, function ($constraint) {})->encode('jpg');
-        Storage::put("launch_schedule/{$file}", $resize->__toString());
-        $launch_schedule->launch_schedule_image = 'launch_schedule/' . $file;
-
+        $launch_schedule->launch_id = $request->launch;
+        $launch_schedule->launch_name = $request->launch_name;
+        $launch_schedule->terminal_from = $request->terminal_from;
+        $launch_schedule->terminal_to = $request->terminal_to;
+        $launch_schedule->schedule_date = $request->schedule_date;
+        $launch_schedule->schedule_time = $request->schedule_time;
+        $launch_schedule->created_by = Auth::user()->id;
         $launch_schedule->save();
+        
+
+        if ($launch_schedule->id) {
+            $data_room = array();
+            foreach ($request->room_id as $value) {
+                $data_room['room_id'] = $value;
+                $data_room['schedule_id'] = $launch_schedule->id;
+                DB::table('launch_schedule_item')->insert($data_room);
+            }
+        }
+        
     }
 
     /**
