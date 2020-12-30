@@ -49,6 +49,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js " type="text/javascript"></script>
 
         <script src="{{ asset('public/admin_asset/js/dropzone.js') }}"></script>
+        <link href="{{ asset('public/admin_asset/css/jquery-ui.css') }}" rel="stylesheet">
         <link href="{{ asset('public/admin_asset/css/custom.css') }}" rel="stylesheet">
 
     </head>
@@ -124,6 +125,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             @endif -->
+
+                            <li class="nav-item">
+                                <a href="{{url('admin/launch-schedules')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+
+                                    <p>
+                                        Launch Schedules
+                                    </p>
+                                </a>
+                            </li>
 
                             @if($user->can('view-user'))
                             <li class="nav-item">
