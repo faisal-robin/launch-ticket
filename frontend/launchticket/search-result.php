@@ -116,7 +116,7 @@ include('header.php');
                                     <div class="launch-list-content border-0">
 
 
-                                    <a class="abh-btn" href="#">Select Cabins</a>
+                                    <a class="abh-btn" href="seating.php">Select Cabins</a>
                                     </div>
 
                                 </div>
@@ -171,7 +171,7 @@ include('header.php');
                                     <div class="launch-list-content border-0">
 
 
-                                        <a class="abh-btn" href="#">Select Cabins</a>
+                                        <a class="abh-btn" href="seating.php">Select Cabins</a>
                                     </div>
 
                                 </div>
@@ -226,7 +226,7 @@ include('header.php');
                                     <div class="launch-list-content border-0">
 
 
-                                    <a class="abh-btn" href="#">Select Cabins</a>
+                                    <a class="abh-btn" href="seating.php">Select Cabins</a>
                                     </div>
 
                                 </div>
