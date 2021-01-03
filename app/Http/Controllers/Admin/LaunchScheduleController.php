@@ -22,7 +22,8 @@ class LaunchScheduleController extends Controller
      */
     public function index()
     {
-        $data['launch_schedule_list'] = LaunchSchedule::all();
+        $data['launch_schedule_list'] = LaunchSchedule::with('launch')->get();
+        // echo "<pre>";print_r($data['launch_schedule_list']);die();
         return view('admin.launch_schedule.index',$data);
     }
 

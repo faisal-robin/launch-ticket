@@ -9,7 +9,7 @@ class State extends Model
 {
    protected $table = 'states';
    
-   public function country()
+   	public function country()
     {
         return $this->belongsTo('App\Models\Country');
     }
