@@ -39,7 +39,7 @@ class HomeController extends Controller {
        if($search == ''){
            $get_terminal = Terminal::whereTerminalStatus('ACTIVE')->orderby('id','desc')->select('id','terminal_name')->limit(5)->get();
        }else{
-           $get_terminal = Terminal::orderby('id','desc')->select('id','terminal_name')->where('terminal_status', 'like', '%' .$search . '%')->limit(15)->get();
+           $get_terminal = Terminal::orderby('id','desc')->select('id','terminal_name')->where('terminal_name', 'like', '%' .$search . '%')->limit(15)->get();
        }
 
        $response = array();
