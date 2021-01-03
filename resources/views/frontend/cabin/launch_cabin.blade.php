@@ -4,139 +4,159 @@
 
 @section('home_content')
 
-<section class="abh-breadcrumb-area" style="background-image:url({{url('/')}}/frontend/launchticket/assets/img/banner-testimonial.jpg)">
+<section class="abh-breadcrumb-area">
     <div class="breadcrumb-top">
         <div class="container">
             <div class="col-lg-12">
                 <div class="breadcrumb-box">
-                    <h2>Launch List</h2>
+                    <h2>Cabin</h2>
                     <ul class="breadcrumb-inn">
                         <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="#">Launch List</a></li>
+                        <li class="active"><a href="#">Cabin</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<div class="seats">
+    <div class="container">
+    <div class="seats-wrapper">
+        <p class="div-header-content">Cabin-wise seat availability</p>
+        <div class="seat-availability-starts">
+            <div class="content-starts">
+                <div class="row justify-content-between">
+                    <div class="col-lg-5">
+                        <p class="div-header-shortnote">Maximum of 2 cabins can be booked per ticket.</p>
+                        <table class="price-list">
+                            <tr style="background-color: #f97250;">
+                                <td width="40%">Cabin Type</td>
+                                <td width="10%">Seats</td>
+                                <td width="30%">Cabin Fare</td>
+                                <td width="20%">Availability</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">Single AC</td>
+                                <td width="10%">1</td>
+                                <td width="30%">1000</td>
+                                <td width="20%">12</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">Single Non AC</td>
+                                <td width="10%">1</td>
+                                <td width="30%">900</td>
+                                <td width="20%">11</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">Double AC</td>
+                                <td width="10%">2</td>
+                                <td width="30%">1800</td>
+                                <td width="20%">5</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">Double Non AC</td>
+                                <td width="10%">2</td>
+                                <td width="30%">1600</td>
+                                <td width="20%">5</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">Family AC</td>
+                                <td width="10%">3</td>
+                                <td width="30%">2700</td>
+                                <td width="20%">5</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">Family Non AC</td>
+                                <td width="10%">3</td>
+                                <td width="30%">2400</td>
+                                <td width="20%">5</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">VIP Single</td>
+                                <td width="10%">1</td>
+                                <td width="30%">4000</td>
+                                <td width="20%">11</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">VIP Double</td>
+                                <td width="10%">2</td>
+                                <td width="30%">5000</td>
+                                <td width="20%">2</td>
+                            </tr>
+                            <tr>
+                                <td width="40%">VIP Family</td>
+                                <td width="10%">3</td>
+                                <td width="30%">5500</td>
+                                <td width="20%">4</td>
+                            </tr>
 
-<section class="search-body pt-5 pb-5">
-    <div class="search">
-        <!-- <div class="launch-filter">
-            <div class="launch-filter-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="launch-filter-options">
-
-                                <div class="row">
-
-                                    <div class="col-lg-2">
-                                        <p>Launch's</p>
-
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p>Name</p>
-
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <p>Departure</p>
-                                    </div>
-                                    <div class="col-lg-2">
-
-                                        <p>Arrival</p>
-
-                                    </div>
-                                    <div class="col-lg-2">
-
-                                        <p>Fare</p>
-
-                                    </div>
-                                    <div class="col-lg-2">
-
-                                        <p>Cabins / Seats</p>
-
-                                    </div>
-                                    
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="launch-list-area">
-            <div class="launch-list-start">
-                <div class="container">
-
-                    @foreach($launch_schedules as $key=>$value)
-                   
-                    <div class="launch-list-body">
-                        <div class="launch-list">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-2">
-                                <div class="launch-image">
-                                    <img class="img-fluid" src="{{asset('storage/app/'.$value->launch->launch_image)}}" style="width: 120px;height: 60px" alt="">
-                                        </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="launch-list-content">
-                                        <h2 class="launch-name">{{$value->launch->launch_name}}</h2>
-                                        
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="launch-list-content">
-
-
-                                        <p> DEPARTURE TIME &nbsp;
-                                              {{$value->schedule_time}}</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="launch-list-content">
-
-
-                                        <p> ARRIVAL TIME<br>
-                                            02:45 PM</p>
-                                    </div>
-
-                                </div>
-                                
-                                <div class="col-lg-2">
-                                    <div class="launch-list-content">
-
-
-                                        <p> Fare<br>
-                                          Tk. {{$value->launch->launch_price_range}}<br>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="launch-list-content border-0">
-
-
-                                    <a class="abh-btn" href="{{url('cabin/'.$value->launch->id)}}">Select Cabins</a>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
+                        </table>
                     </div>
 
-                    @endforeach
-                    
+                    <div class="col-lg-5 align-self-center">
+                        <div class="cabin-details">
+                            <div class="row">
+                                <div class="col">
+                                    <form>
+                                        <label>Cabin type</label>
+                                        <select class="wide" name="" id="">
+                                            <option value="">Select Cabin</option>
+                                            @foreach($all_category as $v_category)
+                                            <option value="{{$v_category->id}}">{{$v_category->category_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="col">
+                                    <form>
+                                        <label>Cabin type</label>
+                                        <select name="" id="">
+                                            <option value="">Select Cabin</option>
+                                            <option value="">VIP</option>
+                                            <option value="">Semi VIP</option>
+                                            <option value="">Normal</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <form>
+                                        <label for="cabin-type">Boarding Point*</label>
+                                        <select class="wide">
+                                            <option selected>Boarding Point</option>
+                                            <option value="1">Sadarghat</option>
+                                            <option value="2">Others</option>
+
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="row">
+                                <div class="col">
+                                <div style="background-color:#ddd;text-align: center;width: auto; height: 60px;padding: 15px; font-weight:700; font-size:24px;">
+                                ৳1000
+                                          </div>
+                                </div>
+                                <br>
+                                <div class="col">
+                                <a href="#" type="submit" class="search-button btn transition-effect">Continue
+                                                        </a>
+                                </div>
+
+                            </div>
+                            <br>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </div>
-</section>
+    </div>
+</div>
+
 
 @endsection

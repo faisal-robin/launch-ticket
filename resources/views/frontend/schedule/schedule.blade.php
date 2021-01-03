@@ -109,8 +109,6 @@
                                 
                                 <div class="col-lg-2">
                                     <div class="launch-list-content">
-
-
                                         <p> Fare<br>
                                           Tk. {{$value->launch->launch_price_range}}<br>
                                     </div>
@@ -118,9 +116,7 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="launch-list-content border-0">
-
-
-                                    <a class="abh-btn" href="{{url('cabin/'.$value->launch->id)}}">Select Cabins</a>
+                                    <a class="abh-btn" href="{{url('cabin/'.$value->id)}}">Select Cabins</a>
                                     </div>
 
                                 </div>

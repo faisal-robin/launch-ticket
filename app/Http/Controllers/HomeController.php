@@ -11,6 +11,7 @@ use App\Models\Terminal;
 use App\Models\LaunchSchedule;
 use App\Models\Launch;
 use App\Models\Room;
+use App\Models\Category;
 
 class HomeController extends Controller {
 
@@ -55,23 +56,21 @@ class HomeController extends Controller {
 
     public function search_schedules(Request $request) {
         $date = str_replace('/', '-', $request->departure_date);
-//        echo  date("Y-m-d", strtotime($date));
         $data['launch_schedules'] = LaunchSchedule::where(['terminal_from' => $request->search_departure_id,
-                    'terminal_to' => $request->search_arrival_id,
-                    'schedule_date' => date("Y-m-d", strtotime($date))])
-                ->get();
+                                                          'terminal_to' => $request->search_arrival_id,
+                                                          'schedule_date' => date("Y-m-d", strtotime($date))])
+                                                    ->get();
         $data['all_slider'] = Slider::all();
 //        echo '<pre>'; 
 //        print_r($data['launch_schedules']);die;
         return view('frontend/schedule/schedule', $data);
     }
-    
-    public function get_cabin($launch_id) {
-         $data['all_slider'] = Slider::all();
-        $data['all_cabin'] = Room::where('launch_id',$launch_id)->get();
+
+    public function get_cabin($schedule_id) {
+        $data['all_category'] = Category::all();
 //                echo '<pre>'; 
-//        print_r($data['all_cabin']);die;
-         return view('frontend/cabin/launch_cabin', $data);
+//        print_r($data['all_category']);die;
+        return view('frontend/cabin/launch_cabin', $data);
     }
 
 }
