@@ -20,4 +20,9 @@ class LaunchSchedule extends Model
      */
 
     //public $timestamps = false;
+
+    public function launch()
+    {
+        return $this->belongsTo('App\Models\Launch');
+    }
 }

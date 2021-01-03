@@ -20,4 +20,9 @@ class Launch extends Model
      */
 
     //public $timestamps = false;
+
+    public function launch_chedules()
+    {
+        return $this->hasMany('App\Models\LaunchSchedule');
+    }
 }

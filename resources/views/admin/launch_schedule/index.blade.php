@@ -16,7 +16,11 @@
                 <thead>
                     <tr>
                         <th>Sl</th>
+                        <th>Launch Name</th>
+                        <th>Terminal From</th>
+                        <th>Terminal To</th>
                         <th>Date</th>
+                        <th>Time</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -25,7 +29,19 @@
                     @foreach($launch_schedule_list  as $key => $value)
                     <tr>
                         <td>{{$key + 1}}</td>
+                        <td>{{$value->launch_name}}</td>
+                        <td>
+                           <?php  $terminal_from = DB::table('terminals')->select('terminal_name')->where('id',$value->terminal_from)->first(); 
+                              echo  $terminal_from->terminal_name;
+                           ?>
+                        </td>
+                        <td>
+                            <?php  $terminal_to = DB::table('terminals')->select('terminal_name')->where('id',$value->terminal_to)->first(); 
+                              echo  $terminal_to->terminal_name;
+                           ?>
+                        </td>
                         <td>{{$value->schedule_date}}</td>
+                        <td>{{$value->schedule_time}}</td>
                         <td>
 
                             <button data-id="{{$value->id}}" style="margin-right: 5px" type="button"  class="btn btn-success btn-sm float-left view_modal" >Edit</button>
