@@ -145,6 +145,7 @@ class LaunchScheduleController extends Controller
     {
         $launch_schedule = LaunchSchedule::find($id);
         $launch_schedule->delete();
-        return redirect('admin/launch_schedules');
+        DB::table('launch_schedule_item')->where('schedule_id', $id)->delete();
+        return redirect('admin/launch-schedules');
     }
 }

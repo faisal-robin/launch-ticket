@@ -46,7 +46,7 @@
 
                             <button data-id="{{$value->id}}" style="margin-right: 5px" type="button"  class="btn btn-success btn-sm float-left view_modal" >Edit</button>
 
-                            <form method="post" action="{{url('admin/launchs/'.$value->id)}}">
+                            <form method="post" action="{{url('admin/launch-schedules/'.$value->id)}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
