@@ -18,6 +18,8 @@
                         <th>Sl</th>
                         <th>Room</th>
                         <th>Launch</th>
+                        <th>Purchase Price</th>
+                        <th>Sell Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -28,6 +30,12 @@
                         <td>{{$key + 1}}</td>
                         <td>{{$value->room_no}}</td>
                         <td>{{$value->launch_info->launch_name}}</td>
+                        <td>
+                            {{ $value->purchase_price }}
+                        </td>
+                        <td>
+                            {{ $value->sell_price }}
+                        </td>
                         <td>
 
                             <button data-id="{{$value->id}}" style="margin-right: 5px" type="button"  class="btn btn-success btn-sm float-left view_modal" >Edit</button>
@@ -83,11 +91,20 @@
                             <label for="type_name">Room No</label>
                             <input  type="text" class="form-control mb-4" name="room_no" id="room_no" placeholder="Room No">
                         </div> 
-                      
+
+                        <div class="form-group col-md-6">
+                            <label for="purchase_price">Purchase Price</label>
+                            <input type="number" id="purchase_price" name="purchase_price" class="form-control" >
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="sell_price">Sell Price</label>
+                            <input type="number" id="sell_price" name="sell_price" class="form-control" >
+                        </div>
 
                         <div class="form-group col-6">
                             <label for="type_name">Room Description</label>
-                            <textarea id="summernote" name="room_description" placeholder=""></textarea>                          
+                            <textarea class="summernote" name="room_description" placeholder=""></textarea>                          
                         </div> 
 
 
@@ -95,14 +112,19 @@
                             <div class="card border-primary mb-3">
                                 <div class="card-header">Categories</div>
                                 <div class="card-body text-primary" style="padding-left: 0px;list-style: none">
-                                    <?php echo $category_list; ?>
+                                    <select class="form-control" name="category_id" id="category_id">
+                                        <option>Select Category</option>
+                                        @foreach($all_category as $v_category)
+                                        <option value="{{$v_category->id}}">{{$v_category->category_name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div> 
-                   
+
 
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -140,7 +162,7 @@
 </div>
 
 <script type="text/javascript">
-    $(".room-add").click(function () { 
+    $(".room-add").click(function () {
         $(".error_msg").html('');
         var data = new FormData($('#room_form')[0]);
 
@@ -179,7 +201,7 @@
 
         $.ajax({
             method: "GET",
-            url: "rooms/"+id+"/edit",
+            url: "rooms/" + id + "/edit",
             data: id,
             cache: false,
             contentType: false,
@@ -207,7 +229,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "rooms/"+id,
+            url: "rooms/" + id,
             data: data,
             cache: false,
             contentType: false,

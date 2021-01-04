@@ -20,8 +20,7 @@
                     <tr>
                         <th>Sl</th>
                         <th>Category Name</th>
-                        <th>Purchase Price</th>
-                        <th>Sell Price</th>
+                       
                         <th>Parent Category</th>
                         <th>Action</th>
                     </tr>
@@ -35,12 +34,7 @@
                         <td>
                             {{ $row->category_name }}
                         </td>
-                        <td>
-                            {{ $row->purchase_price }}
-                        </td>
-                        <td>
-                            {{ $row->sell_price }}
-                        </td>
+                      
                         <td>
                             {{ $row->parent_cat }}
                         </td>

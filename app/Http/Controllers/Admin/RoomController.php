@@ -19,53 +19,53 @@ class RoomController extends Controller {
     public function index() {
         $data['room_list'] = Room::whereRoomStatus('ACTIVE')->get();
         $data['launch_list'] = Launch::whereLaunchStatus('ACTIVE')->get();
-        $all_category = Category::all();
-
-        $category = array(
-            'categories' => array(),
-            'parent_cats' => array()
-        );
-
-        foreach ($all_category as $row) {
-            $category['categories'][$row->id] = $row;
-            $category['parent_cats'][$row->parent_id][] = $row->id;
-        }
-
-        $category_list = "<ul class=''><li class='form-control-label text-right main-category'>Main category</li>" . $this->buildCategory('', $category) . "</ul>";
-
-        $data['category_list'] = $category_list;
+        $data['all_category'] = Category::all();
+//
+//        $category = array(
+//            'categories' => array(),
+//            'parent_cats' => array()
+//        );
+//
+//        foreach ($all_category as $row) {
+//            $category['categories'][$row->id] = $row;
+//            $category['parent_cats'][$row->parent_id][] = $row->id;
+//        }
+//
+//        $category_list = "<ul class=''><li class='form-control-label text-right main-category'>Main category</li>" . $this->buildCategory('', $category) . "</ul>";
+//
+//        $data['category_list'] = $category_list;
 //        echo '<pre>';print_r($data['room_list']);die;
         return view('admin.room.index', $data);
     }
 
-    public function buildCategory($parent, $category, $database_cat = '') {
-        $html = "";
-        if (isset($category['parent_cats'][$parent])) {
-            $html .= "<ul class=''>";
-//            $html .= "<li class='form-control-label text-right main-category'>Main category</li>";
-            foreach ($category['parent_cats'][$parent] as $cat_id) {
-//                echo '<pre>';print_r($category['categories'][$cat_id]['id']);
-                if (!isset($category['parent_cats'][$cat_id])) {
-                    $html .= "<li> "
-                            . " <label>" .
-                            '<input type="checkbox" name="category[]" value="' . $category['categories'][$cat_id]['id'] . '"> ' . $category['categories'][$cat_id]->category_name .
-                            '<input type="radio" class="default-category" name="main_category" value="' . $category['categories'][$cat_id]['id'] . '"> ' . '' .
-                            "</label>"
-                            . "</li>";
-                }
-                if (isset($category['parent_cats'][$cat_id])) {
-                    $html .= "<li> <label>" .
-                            '<input type="checkbox" name="category[]" value="' . $category['categories'][$cat_id]['id'] . '"> ' . $category['categories'][$cat_id]->category_name .
-                            '<input type="radio" class="default-category" name="main_category" value="' . $category['categories'][$cat_id]['id'] . '"> ' . '' .
-                            "</label>";
-                    $html .= $this->buildCategory($cat_id, $category);
-                    $html .= "</li>";
-                }
-            }
-            $html .= "</ul>";
-        }
-        return $html;
-    }
+//    public function buildCategory($parent, $category, $database_cat = '') {
+//        $html = "";
+//        if (isset($category['parent_cats'][$parent])) {
+//            $html .= "<ul class=''>";
+////            $html .= "<li class='form-control-label text-right main-category'>Main category</li>";
+//            foreach ($category['parent_cats'][$parent] as $cat_id) {
+////                echo '<pre>';print_r($category['categories'][$cat_id]['id']);
+//                if (!isset($category['parent_cats'][$cat_id])) {
+//                    $html .= "<li> "
+//                            . " <label>" .
+//                            '<input type="checkbox" name="category[]" value="' . $category['categories'][$cat_id]['id'] . '"> ' . $category['categories'][$cat_id]->category_name .
+//                            '<input type="radio" class="default-category" name="main_category" value="' . $category['categories'][$cat_id]['id'] . '"> ' . '' .
+//                            "</label>"
+//                            . "</li>";
+//                }
+//                if (isset($category['parent_cats'][$cat_id])) {
+//                    $html .= "<li> <label>" .
+//                            '<input type="checkbox" name="category[]" value="' . $category['categories'][$cat_id]['id'] . '"> ' . $category['categories'][$cat_id]->category_name .
+//                            '<input type="radio" class="default-category" name="main_category" value="' . $category['categories'][$cat_id]['id'] . '"> ' . '' .
+//                            "</label>";
+//                    $html .= $this->buildCategory($cat_id, $category);
+//                    $html .= "</li>";
+//                }
+//            }
+//            $html .= "</ul>";
+//        }
+//        return $html;
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -86,15 +86,18 @@ class RoomController extends Controller {
 
         $request->validate([
             'room_no' => 'required',
-            'launch_id' => 'required'
+            'launch_id' => 'required',
+            'sell_price' => 'required'
         ]);
 
         $room = new Room;
 
         $room->launch_id = $request->launch_id;
         $room->room_no = $request->room_no;
-        $room->main_category = $request->main_category;
+        $room->main_category = $request->category_id;
         $room->room_description = $request->room_description;
+        $room->sell_price = $request->sell_price;
+        $room->purchase_price = $request->purchase_price;
 
         $room->save();
 
@@ -127,22 +130,22 @@ class RoomController extends Controller {
     public function edit($id) {
         $data['room_info'] = Room::find($id);
         $data['launch_list'] = Launch::whereLaunchStatus('ACTIVE')->get();
-        $all_category = Category::all();
+        $data['all_category'] = Category::all();
 
-        $category = array(
-            'categories' => array(),
-            'parent_cats' => array()
-        );
-
-        foreach ($all_category as $row) {
-            $category['categories'][$row->id] = $row;
-            $category['parent_cats'][$row->parent_id][] = $row->id;
-        }
-
-//        echo '<pre>';print_r($data['all_attribute_with_group']);die;
-        $category_list = "<ul class=''><li class='form-control-label text-right main-category'>Main category</li>" . $this->buildCategory('', $category) . "</ul>";
-
-        $data['category_list'] = $category_list;
+//        $category = array(
+//            'categories' => array(),
+//            'parent_cats' => array()
+//        );
+//
+//        foreach ($all_category as $row) {
+//            $category['categories'][$row->id] = $row;
+//            $category['parent_cats'][$row->parent_id][] = $row->id;
+//        }
+//
+////        echo '<pre>';print_r($data['all_attribute_with_group']);die;
+//        $category_list = "<ul class=''><li class='form-control-label text-right main-category'>Main category</li>" . $this->buildCategory('', $category) . "</ul>";
+//
+//        $data['category_list'] = $category_list;
         return view('admin.room.edit_room', $data);
     }
 
@@ -157,7 +160,8 @@ class RoomController extends Controller {
 
         $request->validate([
             'room_no' => 'required',
-            'launch_id' => 'required'
+            'launch_id' => 'required',
+            'sell_price' => 'required'
         ]);
 
         $room = Room::find($id);
@@ -165,12 +169,14 @@ class RoomController extends Controller {
         $room->launch_id = $request->launch_id;
         $room->room_no = $request->room_no;
         $room->room_description = $request->room_description;
+        $room->sell_price = $request->sell_price;
+        $room->purchase_price = $request->purchase_price;
 
         $room->save();
 
         if ($request->category) {
 
-            $room->main_category = $request->main_category;
+            $room->main_category = $request->category_id;
             DB::table('room_categories')->where('room_id', $id)->delete();
             $data_category = array();
             foreach ($request->category as $value) {
@@ -192,23 +198,22 @@ class RoomController extends Controller {
         return redirect('admin/rooms');
     }
 
-    public function get_rooms(Request $request)
-    {
+    public function get_rooms(Request $request) {
         $search = $request->search;
-        $id =$request->id;
+        $id = $request->id;
 
-        if($search == ''){
-           $get_room = Room::orderby('room_no','asc')->select('id','room_no')->where('launch_id',$id)->limit(5)->get();
-        }else{
-           $get_room = Room::orderby('room_no','asc')->select('id','room_no')->where('room_no', 'like', '%' .$search . '%')->where('launch_id',$id)->limit(15)->get();
+        if ($search == '') {
+            $get_room = Room::orderby('room_no', 'asc')->select('id', 'room_no')->where('launch_id', $id)->limit(5)->get();
+        } else {
+            $get_room = Room::orderby('room_no', 'asc')->select('id', 'room_no')->where('room_no', 'like', '%' . $search . '%')->where('launch_id', $id)->limit(15)->get();
         }
 
-       $response = array();
-        foreach($get_room as $room){
-           $response[] = array("value"=>$room->id,"label"=>$room->room_no);
+        $response = array();
+        foreach ($get_room as $room) {
+            $response[] = array("value" => $room->id, "label" => $room->room_no);
         }
 
-       return response()->json($response);
+        return response()->json($response);
     }
 
 }

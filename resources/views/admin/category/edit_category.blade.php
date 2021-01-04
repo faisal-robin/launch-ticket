@@ -65,7 +65,7 @@
                     <input type="file" id="category_menu_image" name="category_menu_image" class="form-control" >
                 </div>
                     
-                     <div class="form-group col-md-6">
+<!--                     <div class="form-group col-md-6">
                         <label for="purchase_price">Purchase PRice</label>
                         <input type="number" id="purchase_price" name="purchase_price" value="{{$category_data->purchase_price}}" class="form-control" >
                     </div>
@@ -73,7 +73,7 @@
                     <div class="form-group col-md-6">
                         <label for="sell_price">Sell PRice</label>
                         <input type="number" id="sell_price" name="sell_price" value="{{$category_data->sell_price}}" class="form-control" >
-                    </div>
+                    </div>-->
                     
                 <div class="form-group col-md-6">
                     <label for="category_meta_title">Meta Title</label>

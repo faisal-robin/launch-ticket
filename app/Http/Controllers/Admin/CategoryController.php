@@ -64,8 +64,7 @@ class CategoryController extends Controller {
         $request->validate([
             'category_name' => 'required|max:255',
             'category_cover_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-            'category_menu_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-            'sell_price'=>'required'
+            'category_menu_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048'
         ]);
 
         $response['status'] = 'Error';
@@ -74,8 +73,8 @@ class CategoryController extends Controller {
         $category->home_page_status = $request->home_page_status;
         $category->slug = $request->category_slug;
         $category->parent_id = $request->parent_id;
-         $category->sell_price = $request->sell_price;
-        $category->purchase_price = $request->purchase_price;
+//         $category->sell_price = $request->sell_price;
+//        $category->purchase_price = $request->purchase_price;
 
         $cover_photo = $request->file('category_cover_image')->store('category/category_cover');
         $menu_photo = $request->file('category_menu_image')->store('category/category_menu');
@@ -132,8 +131,7 @@ class CategoryController extends Controller {
     public function update(Request $request, $id) {
         $category = Category::find($id);
         $request->validate([
-            'category_name' => 'required|max:255',
-            'sell_price'=>'required'
+            'category_name' => 'required|max:255'
 //            'category_cover_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
 //            'category_menu_image' => 'required|file|image|mimes:jpg,jpeg,png,gif,webp|max:2048'
         ]);
@@ -141,8 +139,8 @@ class CategoryController extends Controller {
         $category->category_name = $request->category_name;
         $category->slug = $request->category_slug;
         $category->parent_id = $request->parent_id;
-        $category->sell_price = $request->sell_price;
-        $category->purchase_price = $request->purchase_price;
+//        $category->sell_price = $request->sell_price;
+//        $category->purchase_price = $request->purchase_price;
 
         if ($request->hasFile('category_cover_image')) {
             if (File::exists('storage/app/category/' . $category->category_cover_image)) {
