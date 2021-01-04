@@ -33,3 +33,6 @@
     <link rel="stylesheet" href="{{asset('public')}}/frontend_asset/css/responsive.css">
     
     <link rel="stylesheet" href="{{ asset('public/frontend_asset/css/jquery-ui.css') }}">
+    
+    <!--Jquery js-->
+<script src="{{asset('public')}}/frontend_asset/js/jquery.min.js"></script>

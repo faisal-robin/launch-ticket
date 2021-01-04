@@ -57,9 +57,9 @@ class HomeController extends Controller {
     public function search_schedules(Request $request) {
         $date = str_replace('/', '-', $request->departure_date);
         $data['launch_schedules'] = LaunchSchedule::where(['terminal_from' => $request->search_departure_id,
-                                                          'terminal_to' => $request->search_arrival_id,
-                                                          'schedule_date' => date("Y-m-d", strtotime($date))])
-                                                    ->get();
+                    'terminal_to' => $request->search_arrival_id,
+                    'schedule_date' => date("Y-m-d", strtotime($date))])
+                ->get();
         $data['all_slider'] = Slider::all();
 //        echo '<pre>'; 
 //        print_r($data['launch_schedules']);die;
@@ -68,9 +68,25 @@ class HomeController extends Controller {
 
     public function get_cabin($schedule_id) {
         $data['all_category'] = Category::all();
+        $data['schedule_id'] = $schedule_id;
 //                echo '<pre>'; 
 //        print_r($data['all_category']);die;
         return view('frontend/cabin/launch_cabin', $data);
+    }
+
+    public function get_rooms_by_schdule(Request $request) {
+        $schedule_rooms = DB::table('launch_schedule_item')
+                ->join('rooms', 'launch_schedule_item.room_id', '=', 'rooms.id')
+                ->where(['launch_schedule_item.schedule_id' => $request->schedule_id, 'rooms.main_category' => $request->category_id])
+                ->get();
+        $output = '';
+        $output.= '<option value="">Select Cabin</option>';
+        foreach ($schedule_rooms as $row) {
+            $output.= '<option value="' . $row->id . '">' . $row->room_no . '</option>';
+//            array_push($output, '<option value="' . $row->id . '">' . $row->room_no . '</option>');
+        }
+//        echo '<pre>'; print_r($output);die;
+        return response($output);
     }
 
 }
