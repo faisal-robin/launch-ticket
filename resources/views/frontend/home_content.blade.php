@@ -62,7 +62,9 @@
                                     <div class="tab-content gradient-border">
                                         <!-- BEGIN: launch SEARCH -->
                                         <div role="tabpanel" class="tab-pane active" id="launch">
-                                            <form>
+                                            <form action="{{url('search-schedules')}}" method="post" id="searchScheduleForm">
+                                                @csrf
+                                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="row">
                                                     <div class="col-lg-12 product-search-title">Book launch Room ( Vip,
                                                         Semi Vip, Normal, AC, Non AC )
@@ -82,12 +84,13 @@
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <label>Departure From</label><br>
                                                          <input id="search_departure" type="text" class="form-control" placeholder="Where to source...">
-                                                         <input id="search_departure_id" type="hidden" class="form-control" placeholder="Where to source...">
+                                                         <input id="search_departure_id" name="search_departure_id" type="hidden" class="form-control" placeholder="Where to source...">
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <label>Arrival At</label><br>
                                                          <input id="search_arrival" type="text" class="form-control" placeholder="Where to source...">
+                                                     <input id="search_arrival_id" name="search_arrival_id" type="hidden" class="form-control" placeholder="Where to source...">
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
@@ -103,10 +106,15 @@
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
-                                                        <a href="search-result.php" type="submit"
-                                                           class="search-button btn transition-effect">Search
+                                                        <button type="submit"
+                                                           class="search-button btn transition-effect" id="searchLaunch">
+                                                            Search
                                                             launchs
-                                                        </a>
+                                                        </button>
+<!--                                                        <a type="submit"
+                                                           class="search-button btn transition-effect" id="searchLaunch">Search
+                                                            launchs
+                                                        </a>-->
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>

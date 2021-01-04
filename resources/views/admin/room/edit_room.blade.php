@@ -21,17 +21,6 @@
 
 
     <div class="form-group col-6">
-        <label for="type_name">Purchase Price</label>
-        <input  type="number" class="form-control mb-4" value="{{$room_info->purchase_price}}" name="purchase_price" id="purchase_price" placeholder="Room No">
-    </div> 
-
-
-    <div class="form-group col-6">
-        <label for="type_name">Sell Price</label>
-        <input  type="number" class="form-control mb-4" value="{{$room_info->sell_price}}" name="sell_price" id="sell_price" placeholder="Room No">
-    </div> 
-
-    <div class="form-group col-6">
         <label for="type_name">Room Description</label>
         <textarea id="summernote1" name="room_description" placeholder="">{{$room_info->room_description}}</textarea>                          
     </div> 

@@ -98,5 +98,7 @@ Route::group(['prefix' => 'cart'], function() {
 //Route::get('product_info/{any}', ['as' => 'product_slug', 'jdytk' => 'HomeController@product_details']);
 Route::get('product/{any}', 'HomeController@product_details');
 
-Route::get('get_terminal', 'HomeController@get_terminal');
+Route::get('get-terminal', 'HomeController@get_terminal');
+Route::get('cabin/{any}', 'HomeController@get_cabin');
+Route::post('search-schedules', 'HomeController@search_schedules');
 

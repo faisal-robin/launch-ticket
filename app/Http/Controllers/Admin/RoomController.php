@@ -86,17 +86,13 @@ class RoomController extends Controller {
 
         $request->validate([
             'room_no' => 'required',
-            'launch_id' => 'required',
-            'sell_price' => 'required',
-            'purchase_price' => 'required'
+            'launch_id' => 'required'
         ]);
 
         $room = new Room;
 
         $room->launch_id = $request->launch_id;
         $room->room_no = $request->room_no;
-        $room->sell_price = $request->sell_price;
-        $room->purchase_price = $request->purchase_price;
         $room->main_category = $request->main_category;
         $room->room_description = $request->room_description;
 
@@ -161,17 +157,13 @@ class RoomController extends Controller {
 
         $request->validate([
             'room_no' => 'required',
-            'launch_id' => 'required',
-            'sell_price' => 'required',
-            'purchase_price' => 'required'
+            'launch_id' => 'required'
         ]);
 
         $room = Room::find($id);
 
         $room->launch_id = $request->launch_id;
         $room->room_no = $request->room_no;
-        $room->sell_price = $request->sell_price;
-        $room->purchase_price = $request->purchase_price;
         $room->room_description = $request->room_description;
 
         $room->save();

@@ -18,8 +18,6 @@
                         <th>Sl</th>
                         <th>Room</th>
                         <th>Launch</th>
-                        <th>Purchase Price</th>
-                        <th>Sell Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -30,8 +28,6 @@
                         <td>{{$key + 1}}</td>
                         <td>{{$value->room_no}}</td>
                         <td>{{$value->launch_info->launch_name}}</td>
-                        <td>{{$value->purchase_price}}</td>
-                        <td>{{$value->sell_price}}</td>
                         <td>
 
                             <button data-id="{{$value->id}}" style="margin-right: 5px" type="button"  class="btn btn-success btn-sm float-left view_modal" >Edit</button>
@@ -87,19 +83,7 @@
                             <label for="type_name">Room No</label>
                             <input  type="text" class="form-control mb-4" name="room_no" id="room_no" placeholder="Room No">
                         </div> 
-                        
-                        
-                        <div class="form-group col-6">
-                            <label for="type_name">Purchase Price</label>
-                            <input  type="number" class="form-control mb-4" name="purchase_price" id="purchase_price" placeholder="Room No">
-                        </div> 
-                        
-                        
-                        <div class="form-group col-6">
-                            <label for="type_name">Sell Price</label>
-                            <input  type="number" class="form-control mb-4" name="sell_price" id="sell_price" placeholder="Room No">
-                        </div> 
-
+                      
 
                         <div class="form-group col-6">
                             <label for="type_name">Room Description</label>
