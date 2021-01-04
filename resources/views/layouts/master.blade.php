@@ -395,6 +395,18 @@ placeholder: 'Hello Bootstrap 4',
         }
         },
         });
+$('.summernote').summernote({
+placeholder: 'Hello Bootstrap 4',
+        tabsize: 2,
+        height: 100,
+        callbacks: {
+        onImageUpload: function(files) {
+        for (let i = 0; i < files.length; i++) {
+        $.upload(files[i]);
+        }
+        }
+        },
+        });
 });
 $.upload = function (file) {
 let out = new FormData();
@@ -406,7 +418,7 @@ headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         method: 'POST',
-        url: '{{url('summurnote - image - upload')}}',
+        url: '{{url('summurnote-image-upload')}}',
         contentType: false,
         cache: false,
         processData: false,
