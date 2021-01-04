@@ -97,11 +97,10 @@
                                                         <label>Departure Date</label>
                                                         <div class="input-group">
 
-                                                            <input id="departure_date" name="departure_date"
-                                                                   class="form-control" placeholder="DD/MM/YY"
-                                                                   data-select="datepicker" type="text">
-                                                            <span class="input-group-addon"><i
-                                                                    class="fa fa-calendar fa-fw"></i></span>
+                                                            <input id="departure_date" name="departure_date" autocomplete="off"
+                                                                   class="form-control" placeholder="MM/DD/YY"
+                                                                   type="date"  onchange="if(this.value){alert(Date())};" style="background-color: white;background: white">
+                                                           
                                                         </div>
                                                     </div>
                                                     <div class="clearfix"></div>

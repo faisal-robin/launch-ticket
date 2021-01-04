@@ -32,6 +32,16 @@
 
 <!-- Smartsupp Live Chat script -->
 <script type="text/javascript">
+    $(".datepicker").datepicker({
+    changeMonth: true, 
+    changeYear: true, 
+    dateFormat: 'yy-mm-dd',
+    maxDate: 'today',
+    onSelect: function(dateText) {
+        $sD = new Date(dateText);
+        $("input#DateTo").datepicker('option', 'minDate', min);
+    }
+    });
 var _smartsupp = _smartsupp || {};
 _smartsupp.key = 'cd7f3b02734a47c2610e70bb02c46ef98cec330f';
 window.smartsupp || (function (d) {
@@ -147,5 +157,4 @@ window.smartsupp || (function (d) {
         //$("#selectionSpan").text(ctr);
     }
 
-    
 </script>
