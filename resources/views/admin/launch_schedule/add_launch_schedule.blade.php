@@ -138,7 +138,6 @@
                     },
                     success: function (data) {
                         response(data);
-                        console.log(data);
                     }
                 });
             },
@@ -160,12 +159,24 @@
             var room_id = $('#room_id').val();
             var room_name = $('#room_name').val();
             
-            $(".list-items").append("<div  style='border: 1px solid gray;margin:5px;padding:10px;text-align:center' class='col-md-2 previewBox'><a class='close'></a><input type='hidden' name='room_id[]' value='"+room_id+"'>"+room_name+"</div>");
-
-            $('.close').on('click', function(e) { 
-                // $('.previewBox').remove(); 
-                $(this).parent().remove();
+            var exists = 0;
+            $( ".room_no" ).each( function( index, element ){
+                if ($( this ).val() == room_id) {
+                   alert('Room no already exists');
+                   exists = 1;
+                }
             });
+            
+            if (!exists) {
+
+                $(".list-items").append("<div  style='border: 1px solid gray;margin:5px;padding:10px;text-align:center' class='col-md-2 previewBox'><a class='close'></a><input class='room_no' type='hidden' name='room_id[]' value='"+room_id+"'>"+room_name+"</div>");
+
+                $('.close').on('click', function(e) { 
+                    // $('.previewBox').remove(); 
+                    $(this).parent().remove();
+                });
+            }
+            
         });
     });
  
@@ -205,6 +216,32 @@
     $('#launch').on('change', function() {
       var launch_name = $(this).find(":selected").text();
       $('#launch_name').val(launch_name);
+    });
+
+    $('#terminal_from').on('change', function() {
+      var terminal_from = $(this).find(":selected").val();
+      var terminal_to = $('#terminal_to').find(":selected").val();
+
+      if (terminal_from == terminal_to) {
+        var option = $('#terminal_from');
+        option[0].selectedIndex = 0;
+        alert('Terminal already selected');
+        
+        return;
+      }
+    });
+
+    $('#terminal_to').on('change', function() {
+      var terminal_to = $(this).find(":selected").val();
+      var terminal_from = $('#terminal_from').find(":selected").val();
+
+      if (terminal_from == terminal_to) {
+         var option = $('#terminal_to');
+         option[0].selectedIndex = 0;
+        alert('Terminal already selected');
+        
+        return;
+      }
     });
 </script>
 
