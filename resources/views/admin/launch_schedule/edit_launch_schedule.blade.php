@@ -52,10 +52,10 @@
         <div class="card-body">
             <form id="edit_form" autocomplete="off">
                 <div class="form-row">
-                    
+                    @method('PUT')
                     <div class="form-group col-md-12">
                         <label for="launch">Launch</label>
-                        <input type="hidden" id="launch_name" name="launch_name">
+                        <input type="hidden" id="launch_name" name="launch_name" value="{{$launch_schedule_info->launch_name}}">
                         <input type="hidden" id="schedule_id" name="schedule_id" value="{{$launch_schedule_info->id}}">
                         <select name="launch" class="form-control" id="launch" >
                             <option value="">Select Launch</option>
@@ -201,7 +201,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            method: "PUT",
+            method: "POST",
             url: "{{url("admin/launch-schedules")}}/" + id,
             data: data,
             cache: false,
@@ -212,8 +212,8 @@
             }
         }).done(function () {
             $("#success_msg").html("Data Save Successfully");
-            window.location.href = "{{ url('admin/launch-schedules')}}";
-            // window.location.reload();
+            // window.location.href = "{{ url('admin/launch-schedules')}}";
+            window.location.reload();
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
             $.each(json_data.errors, function (key, value) {
