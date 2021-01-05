@@ -117,9 +117,9 @@
                                     <div class="col">
                                         <label for="cabin-type">Boarding Point*</label>
                                         <select class="form-control" class="wide">
-                                            <option selected>Boarding Point</option>
-                                            <option value="1">Sadarghat</option>
-                                            <option value="2">Others</option>
+                                            @foreach($boarding_point as $row)
+                                            <option value="{{$row->id}}">{{$row->terminal_name}}</option>
+                                           @endforeach
                                         </select>
                                     </div>
                                 </div>

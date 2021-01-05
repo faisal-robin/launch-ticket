@@ -80,8 +80,13 @@ class HomeController extends Controller {
     public function get_cabin($schedule_id) {
         $data['all_category'] = Category::all();
         $data['schedule_id'] = $schedule_id;
+        $data['boarding_point'] = DB::table('launch_schedules')
+                ->select('terminals.*')
+                ->where('launch_schedules.id',$schedule_id)
+                ->join('terminals','launch_schedules.terminal_to','=','terminals.id')
+                ->get();
 //                echo '<pre>'; 
-//        print_r($data['all_category']);die;
+//        print_r($data['boarding_point']);die;
         return view('frontend/cabin/launch_cabin', $data);
     }
 
