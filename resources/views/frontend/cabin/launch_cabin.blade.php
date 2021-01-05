@@ -94,39 +94,33 @@
                         </div>
 
                         <div class="col-lg-5 align-self-center">
+                            <form>
                             <div class="cabin-details">
                                 <div class="row">
-                                    <div class="col">
-                                        <form>
+                                    <div class="col">                                      
                                             <label>Cabin type</label>
-                                            <select class="wide" name="" id="category_info"> 
-                                                <option value="">Select Cabin</option>
+                                            <select class="form-control" class="wide" name="" id="category_info"> 
+                                                <option value="">Select Category</option>
                                                 @foreach($all_category as $v_category)
                                                 <option value="{{$v_category->id}}">{{$v_category->category_name}}</option>
                                                 @endforeach
                                             </select>
-                                        </form>
                                     </div>
                                     <div class="col">
-                                        <form>
-                                            <label>Select Cabin</label>
-                                            <select name="" id="cabin_info">
-                                               
-                                            </select>
-                                        </form>
+                                        <label>Select Cabin</label>
+                                        <select class="form-control"  name="" id="cabin_info">
+                                            <option value="">Select Cabin</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <form>
-                                            <label for="cabin-type">Boarding Point*</label>
-                                            <select class="wide">
-                                                <option selected>Boarding Point</option>
-                                                <option value="1">Sadarghat</option>
-                                                <option value="2">Others</option>
-
-                                            </select>
-                                        </form>
+                                        <label for="cabin-type">Boarding Point*</label>
+                                        <select class="form-control" class="wide">
+                                            <option selected>Boarding Point</option>
+                                            <option value="1">Sadarghat</option>
+                                            <option value="2">Others</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <br><br>
@@ -141,11 +135,10 @@
                                         <a href="#" type="submit" class="search-button btn transition-effect">Continue
                                         </a>
                                     </div>
-
                                 </div>
                                 <br>
                             </div>
-
+                            </form>
                         </div>
 
                     </div>
@@ -159,8 +152,9 @@
     $("#category_info").change(function () {
         let schedule_id = <?php echo $schedule_id?>;
         let catId = $(':selected').val();
+
         $.ajax({
-            url: '{{url('get-rooms-by-schdule')}}',
+            url: '{{url('rooms-by-schdule')}}',
             data: {schedule_id: schedule_id,category_id:catId},
             method: 'GET',
             success: function (response) {

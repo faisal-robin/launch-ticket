@@ -85,14 +85,13 @@ class HomeController extends Controller {
                 ->join('rooms', 'launch_schedule_item.room_id', '=', 'rooms.id')
                 ->where(['launch_schedule_item.schedule_id' => $request->schedule_id, 'rooms.main_category' => $request->category_id])
                 ->get();
-        $output = '';
-        $output .= '<option value="">Select Cabin</option>';
+        $html = '';
+        $html .= '<option value="">Select Cabin</option>';
         foreach ($schedule_rooms as $row) {
-            $output .= '<option value="' . $row->id . '">' . $row->room_no . '</option>';
-//            array_push($output, '<option value="' . $row->id . '">' . $row->room_no . '</option>');
+            $html .= '<option value="' . $row->id . '">' . $row->room_no . '</option>';
         }
-//        echo '<pre>'; print_r($output);die;
-        return response($output);
+        // echo '<pre>'; print_r($html);die;
+        return response($html);
     }
 
 }
