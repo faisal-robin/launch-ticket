@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 //use Faker\Provider\Image;
@@ -13,18 +14,17 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 
-class LaunchScheduleController extends Controller
-{
+class LaunchScheduleController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $data['launch_schedule_list'] = LaunchSchedule::with('launch')->get();
         // echo "<pre>";print_r($data['launch_schedule_list']);die();
-        return view('admin.launch_schedule.index',$data);
+        return view('admin.launch_schedule.index', $data);
     }
 
     /**
@@ -32,12 +32,11 @@ class LaunchScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         $data['launch_list'] = Launch::all();
         $data['terminal_list'] = Terminal::all();
         // echo "<pre>";print_r($data['launch_list']);die();
-        return view('admin.launch_schedule.add_launch_schedule',$data);
+        return view('admin.launch_schedule.add_launch_schedule', $data);
     }
 
     /**
@@ -46,8 +45,7 @@ class LaunchScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         $request->validate([
             'launch' => 'required',
@@ -62,12 +60,16 @@ class LaunchScheduleController extends Controller
         $launch_schedule->launch_id = $request->launch;
         $launch_schedule->launch_name = $request->launch_name;
         $launch_schedule->terminal_from = $request->terminal_from;
+        $terminal_from_state_id = Terminal::find($request->terminal_from);
+        $launch_schedule->from_state_id = $terminal_from_state_id->state_id;
         $launch_schedule->terminal_to = $request->terminal_to;
+        $terminal_to_state_id = Terminal::find($request->terminal_to);
+        $launch_schedule->to_state_id = $terminal_to_state_id->state_id;
         $launch_schedule->schedule_date = $request->schedule_date;
         $launch_schedule->schedule_time = $request->schedule_time;
         $launch_schedule->created_by = Auth::user()->id;
         $launch_schedule->save();
-        
+
 
         if ($launch_schedule->id) {
             $data_room = array();
@@ -77,7 +79,6 @@ class LaunchScheduleController extends Controller
                 DB::table('launch_schedule_item')->insert($data_room);
             }
         }
-        
     }
 
     /**
@@ -86,8 +87,7 @@ class LaunchScheduleController extends Controller
      * @param  \App\teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(teacher $teacher)
-    {
+    public function show(teacher $teacher) {
         //
     }
 
@@ -97,10 +97,9 @@ class LaunchScheduleController extends Controller
      * @param  \App\teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {      
+    public function edit($id) {
         $data['launch_schedule_info'] = LaunchSchedule::find($id);
-        $data['launch_schedule_item'] = DB::table('launch_schedule_item')->select('rooms.id','rooms.room_no')->leftJoin('rooms', 'launch_schedule_item.room_id', '=', 'rooms.id')->where('schedule_id',$id)->get();
+        $data['launch_schedule_item'] = DB::table('launch_schedule_item')->select('rooms.id', 'rooms.room_no')->leftJoin('rooms', 'launch_schedule_item.room_id', '=', 'rooms.id')->where('schedule_id', $id)->get();
 
         // echo "<pre>";print_r($data['launch_schedule_item']);die();
 
@@ -116,12 +115,11 @@ class LaunchScheduleController extends Controller
      * @param  \App\teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $launch_schedule = LaunchSchedule::find($id);
-        
-         // echo "<pre>";print_r($request->launch);die();
-        
+
+        // echo "<pre>";print_r($request->launch);die();
+
         $request->validate([
             'launch' => 'required',
             'terminal_from' => 'required',
@@ -134,13 +132,17 @@ class LaunchScheduleController extends Controller
         $launch_schedule->launch_id = $request->launch;
         $launch_schedule->launch_name = $request->launch_name;
         $launch_schedule->terminal_from = $request->terminal_from;
+        $terminal_from_state_id = Terminal::find($request->terminal_from);
+        $launch_schedule->from_state_id = $terminal_from_state_id->state_id;
         $launch_schedule->terminal_to = $request->terminal_to;
+        $terminal_to_state_id = Terminal::find($request->terminal_to);
+        $launch_schedule->to_state_id = $terminal_to_state_id->state_id;
         $launch_schedule->schedule_date = $request->schedule_date;
         $launch_schedule->schedule_time = $request->schedule_time;
         $launch_schedule->created_by = Auth::user()->id;
 
         $launch_schedule->save();
-        
+
         DB::table('launch_schedule_item')->where('schedule_id', $id)->delete();
 
         if ($launch_schedule->id) {
@@ -159,11 +161,11 @@ class LaunchScheduleController extends Controller
      * @param  \App\teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $launch_schedule = LaunchSchedule::find($id);
         $launch_schedule->delete();
         DB::table('launch_schedule_item')->where('schedule_id', $id)->delete();
         return redirect('admin/launch-schedules');
     }
+
 }
