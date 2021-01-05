@@ -36,3 +36,4 @@
     
     <!--Jquery js-->
 <script src="{{asset('public')}}/frontend_asset/js/jquery.min.js"></script>
+
