@@ -72,20 +72,21 @@
             <div class="launch-list-start">
                 <div class="container">
 
+                    @if(session('schedule_departure_date') || $launch_schedules !== '')
                     @foreach($launch_schedules as $key=>$value)
-                   
+
                     <div class="launch-list-body">
                         <div class="launch-list">
                             <div class="row justify-content-center">
                                 <div class="col-lg-2">
-                                <div class="launch-image">
-                                    <img class="img-fluid" src="{{asset('storage/app/'.$value->launch->launch_image)}}" style="width: 120px;height: 60px" alt="">
-                                        </div>
+                                    <div class="launch-image">
+                                        <img class="img-fluid" src="{{asset('storage/app/'.$value->launch->launch_image)}}" style="width: 120px;height: 60px" alt="">
+                                    </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="launch-list-content">
                                         <h2 class="launch-name">{{$value->launch->launch_name}}</h2>
-                                        
+
                                     </div>
 
                                 </div>
@@ -94,7 +95,7 @@
 
 
                                         <p> DEPARTURE TIME &nbsp;
-                                              {{$value->schedule_time}}</p>
+                                            {{$value->schedule_time}}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
@@ -106,17 +107,17 @@
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="col-lg-2">
                                     <div class="launch-list-content">
                                         <p> Fare<br>
-                                          Tk. {{$value->launch->launch_price_range}}<br>
+                                            Tk. {{$value->launch->launch_price_range}}<br>
                                     </div>
 
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="launch-list-content border-0">
-                                    <a class="abh-btn" href="{{url('cabin/'.$value->id)}}">Select Cabins</a>
+                                        <a class="abh-btn" href="{{url('cabin/'.$value->id)}}">Select Cabins</a>
                                     </div>
 
                                 </div>
@@ -128,10 +129,15 @@
 
                     @endforeach
                     
+                    @else                    
+                    <div class="text-red text-center text-danger" style="font-size: 21px">No data found!</div>
+                    @php session()->forget('schedule_departure_date'); @endphp
+                    @endif
                 </div>
             </div>
 
         </div>
+
     </div>
 </section>
 

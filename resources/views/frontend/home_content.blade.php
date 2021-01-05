@@ -99,7 +99,7 @@
 
                                                             <input id="departure_date" name="departure_date" autocomplete="off"
                                                                    class="form-control" placeholder="MM/DD/YY"
-                                                                   type="date"  onchange="if(this.value){alert(Date())};" style="background-color: white;background: white">
+                                                                   type="date" style="background-color: white;background: white">
                                                            
                                                         </div>
                                                     </div>
