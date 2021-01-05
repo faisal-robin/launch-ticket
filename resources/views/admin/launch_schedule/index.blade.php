@@ -44,7 +44,7 @@
                         <td>{{$value->schedule_time}}</td>
                         <td>
 
-                            <button data-id="{{$value->id}}" style="margin-right: 5px" type="button"  class="btn btn-success btn-sm float-left view_modal" >Edit</button>
+                            <a data-id="{{$value->id}}" style="margin-right: 5px" href="{{ url('admin/launch-schedules/'.$value->id.'/edit') }}"  class="btn btn-success btn-sm float-left" >Edit</a>
 
                             <form method="post" action="{{url('admin/launch-schedules/'.$value->id)}}">
                                 @csrf

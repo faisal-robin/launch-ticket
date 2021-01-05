@@ -100,7 +100,12 @@ class LaunchScheduleController extends Controller
     public function edit($id)
     {      
         $data['launch_schedule_info'] = LaunchSchedule::find($id);
-        //echo "<pre>";print_r($data['subject_list']);die();
+        $data['launch_schedule_item'] = DB::table('launch_schedule_item')->select('rooms.id','rooms.room_no')->leftJoin('rooms', 'launch_schedule_item.room_id', '=', 'rooms.id')->where('schedule_id',$id)->get();
+
+        // echo "<pre>";print_r($data['launch_schedule_item']);die();
+
+        $data['launch_list'] = Launch::all();
+        $data['terminal_list'] = Terminal::all();
         return view('admin.launch_schedule.edit_launch_schedule', $data);
     }
 
@@ -114,25 +119,37 @@ class LaunchScheduleController extends Controller
     public function update(Request $request, $id)
     {
         $launch_schedule = LaunchSchedule::find($id);
-
+        
+        echo "<pre>";print_r($launch_schedule);die();
+        
         $request->validate([
-            'launch_schedule_name' => 'required',
-            'launch_schedule_price_range' => 'required',
+            'launch' => 'required',
+            'terminal_from' => 'required',
+            'terminal_to' => 'required',
+            'schedule_date' => 'required',
+            'schedule_time' => 'required',
         ]);
 
-        $launch_schedule->launch_schedule_name = $request->launch_schedule_name;
-        $launch_schedule->launch_schedule_price_range = $request->launch_schedule_price_range;
-        $launch_schedule->launch_schedule_description = $request->launch_schedule_description;
-        
-        if ($request->hasFile('launch_schedule_image')) {
-            if (File::exists('storage/app/' . $launch_schedule->launch_schedule_image)) {
-                File::delete('storage/app/' . $launch_schedule->launch_schedule_image);
-            }
-            $photo = $request->file('launch_schedule_image')->store('launch_schedule');
-            $launch_schedule->launch_schedule_image = $photo;
-        }
+
+        $launch_schedule->launch_id = $request->launch;
+        $launch_schedule->launch_name = $request->launch_name;
+        $launch_schedule->terminal_from = $request->terminal_from;
+        $launch_schedule->terminal_to = $request->terminal_to;
+        $launch_schedule->schedule_date = $request->schedule_date;
+        $launch_schedule->schedule_time = $request->schedule_time;
+        $launch_schedule->created_by = Auth::user()->id;
 
         $launch_schedule->save();
+        
+
+        if ($launch_schedule->id) {
+            $data_room = array();
+            foreach ($request->room_id as $value) {
+                $data_room['room_id'] = $value;
+                $data_room['schedule_id'] = $launch_schedule->id;
+                DB::table('launch_schedule_item')->insert($data_room);
+            }
+        }
     }
 
     /**
