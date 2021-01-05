@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="col">
                                         <label>Select Cabin</label>
-                                        <select class="form-control"  name="" id="cabin_info">
+                                        <select class="form-control"  name="room_id" id="cabin_info">
                                             <option value="">Select Cabin</option>
                                         </select>
                                     </div>
@@ -126,8 +126,7 @@
                                 <br><br>
                                 <div class="row">
                                     <div class="col">
-                                        <div style="background-color:#ddd;text-align: center;width: auto; height: 60px;padding: 15px; font-weight:700; font-size:24px;">
-                                            ৳1000
+                                        <div id="price" style="background-color:#ddd;text-align: center;width: auto; height: 60px;padding: 15px; font-weight:700; font-size:24px;">
                                         </div>
                                     </div>
                                     <br>
@@ -160,6 +159,18 @@
             success: function (response) {
                 console.log(response);
              $('#cabin_info').html(response);
+            }
+        });
+    });
+
+    $("#cabin_info").change(function () {
+        var room_id = $('#cabin_info').val();
+        $.ajax({
+            url: '{{url('room-price')}}',
+            data: {room_id: room_id},
+            method: 'GET',
+            success: function (response) {
+             $('#price').text(response);
             }
         });
     });

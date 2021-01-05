@@ -99,4 +99,12 @@ class HomeController extends Controller {
         return response($html);
     }
 
+    public function get_rooms_price(Request $request){
+        $price = DB::table('rooms')
+                ->where('id',$request->room_id)
+                ->select('sell_price')
+                ->first();
+        return response($price->sell_price);
+    }
+
 }
