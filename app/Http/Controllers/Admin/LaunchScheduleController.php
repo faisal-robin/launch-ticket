@@ -120,7 +120,7 @@ class LaunchScheduleController extends Controller
     {
         $launch_schedule = LaunchSchedule::find($id);
         
-        echo "<pre>";print_r($launch_schedule);die();
+         // echo "<pre>";print_r($request->launch);die();
         
         $request->validate([
             'launch' => 'required',
@@ -141,6 +141,7 @@ class LaunchScheduleController extends Controller
 
         $launch_schedule->save();
         
+        DB::table('launch_schedule_item')->where('schedule_id', $id)->delete();
 
         if ($launch_schedule->id) {
             $data_room = array();
