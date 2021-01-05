@@ -106,12 +106,12 @@ window.smartsupp || (function (d) {
                 if ($('#search_arrival').val() !== ui.item.label) {
                     // Set selection
                     $(this).val(ui.item.label); // display the selected text
-                    $('#search_departure_id').val(ui.item.value); // save selected id to input
+                    $('#departure_from').val(ui.item.value); // save selected id to input
                     return false;
                 } else {
                     alert('Terminal already selected!');
                     $(this).val(""); // display the selected text
-                    $('#search_departure_id').val(""); // save selected id to input
+                    $('#departure_from').val(""); // save selected id to input
                     return false;
                 }
 
@@ -138,12 +138,12 @@ window.smartsupp || (function (d) {
                 if ($('#search_departure').val() !== ui.item.label) {
                     // Set selection
                     $(this).val(ui.item.label); // display the selected text
-                    $('#search_arrival_id').val(ui.item.value); // save selected id to input
+                    $('#arrival_at').val(ui.item.value); // save selected id to input
                     return false;
                 } else {
                     alert('Terminal already selected!');
                     $(this).val(""); // display the selected text
-                    $('#search_arrival_id').val(""); // save selected id to input
+                    $('#arrival_at').val(""); // save selected id to input
                     return false;
                 }
             }

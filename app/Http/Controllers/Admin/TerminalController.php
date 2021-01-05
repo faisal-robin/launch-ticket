@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Terminal;
+use Illuminate\Support\Facades\DB;
 
 class TerminalController extends Controller
 {
@@ -16,6 +17,9 @@ class TerminalController extends Controller
     public function index()
     {
         $data['terminal_list'] = Terminal::all();
+        $data['state_list'] = DB::table('states')
+                ->whereCountryId(18)
+                ->get();
         return view('admin.terminal.index',$data);
     }
 
@@ -39,12 +43,14 @@ class TerminalController extends Controller
     {
 
         $request->validate([
-            'terminal_name' => 'required'
+            'terminal_name' => 'required',
+            'city_name' => 'required'
         ]);
 
         $terminal = new Terminal;
 
         $terminal->terminal_name = $request->terminal_name;
+        $terminal->state_id = $request->city_name;
 
         $terminal->save();
     }
@@ -68,6 +74,9 @@ class TerminalController extends Controller
      */
     public function edit($id)
     {      
+         $data['state_list'] = DB::table('states')
+                ->whereCountryId(18)
+                ->get();
         $data['terminal_info'] = Terminal::find($id);
         //echo "<pre>";print_r($data['subject_list']);die();
         return view('admin.terminal.edit_terminal', $data);
@@ -85,10 +94,12 @@ class TerminalController extends Controller
         $terminal = Terminal::find($id);
 
         $request->validate([
-            'terminal_name' => 'required'
+            'terminal_name' => 'required',
+            'city_name' => 'required'
         ]);
 
         $terminal->terminal_name = $request->terminal_name;
+         $terminal->state_id = $request->city_name;
     
         //echo "<pre>";print_r($terminal);die();
         $terminal->save();
