@@ -13,8 +13,8 @@ class AddAdditionalColumnsToRoomsTable extends Migration {
      */
     public function up() {
         Schema::table('rooms', function (Blueprint $table) {
-            $table->text('sell_price')->after('room_no');
-            $table->text('purchase_price')->after('sell_price');
+            $table->double('sell_price',10,2)->after('room_no');
+            $table->double('purchase_price',10,2)->after('sell_price');
         });
     }
 

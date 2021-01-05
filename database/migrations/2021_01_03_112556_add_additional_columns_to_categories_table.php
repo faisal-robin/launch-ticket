@@ -14,8 +14,8 @@ class AddAdditionalColumnsToCategoriesTable extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-          $table->text('sell_price')->after('category_name');
-          $table->text('purchase_price')->after('sell_price');
+          $table->double('sell_price',10,2)->after('category_name');
+          $table->double('purchase_price',10,2)->after('sell_price');
         });
     }
 

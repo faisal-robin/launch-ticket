@@ -58,7 +58,6 @@ class HomeController extends Controller {
         $data['all_slider'] = Slider::all();
         $date = str_replace('/', '-', $request->departure_date);
         if ($date < date('Y-m-d')) {
-            $data['launch_schedules'] ='';
             session()->flash('schedule_departure_date', 'not_allow');
         } else {
             $data['launch_schedules'] = LaunchSchedule::where(['terminal_from' => $request->search_departure_id,

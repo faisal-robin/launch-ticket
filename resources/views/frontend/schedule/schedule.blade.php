@@ -72,7 +72,7 @@
             <div class="launch-list-start">
                 <div class="container">
 
-                    @if(session('schedule_departure_date') || $launch_schedules !== '')
+                    @if(session('schedule_departure_date') !== 'not_allow' || $launch_schedules)
                     @foreach($launch_schedules as $key=>$value)
 
                     <div class="launch-list-body">
