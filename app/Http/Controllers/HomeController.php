@@ -24,12 +24,7 @@ class HomeController extends Controller {
     public function __construct() {
 //        $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+ 
     public function index() {
         $data['all_slider'] = Slider::all();
         $data['all_terminal'] = Terminal::whereTerminalStatus('ACTIVE')->get();
@@ -42,9 +37,9 @@ class HomeController extends Controller {
         $search = $request->search;
 
         if ($search == '') {
-            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('country_id',18)->limit(5)->get();
+            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('country_id', 18)->limit(5)->get();
         } else {
-            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('name', 'like', '%' . $search . '%')->where('country_id',18)->limit(15)->get();
+            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('name', 'like', '%' . $search . '%')->where('country_id', 18)->limit(15)->get();
         }
 
         $response = array();
@@ -55,19 +50,22 @@ class HomeController extends Controller {
         return response()->json($response);
     }
 
-    public function search_schedules(Request $request) {        
+    public function search_schedules(Request $request) {
         $request->validate([
-            'departure_from' => 'required|max:255',
-            'arrival_at' => 'required|max:255',
-            'departure_date' => 'required|max:255'
-        ]);       
+            'departure_from' => 'required',
+            'arrival_at' => 'required',
+            'departure_date' => 'required'
+        ]); 
+        
         $data['all_slider'] = Slider::all();
         $date = str_replace('/', '-', $request->departure_date);
+        $data['launch_schedules'] = []; 
+        
         if ($date < date('Y-m-d')) {
-            $data['launch_schedules'] = [];
             session()->flash('schedule_departure_date', 'not_allow');
-        } else {        
-            $data['launch_schedules'] = LaunchSchedule::where(['from_state_id' => $request->departure_from,
+        } else {
+            $data['launch_schedules'] = LaunchSchedule::where([
+                        'from_state_id' => $request->departure_from,
                         'to_state_id' => $request->arrival_at,
                         'schedule_date' => date("Y-m-d", strtotime($date))])
                     ->get();
@@ -79,11 +77,13 @@ class HomeController extends Controller {
 
     public function get_cabin($schedule_id) {
         $data['all_category'] = Category::all();
-        $data['schedule_id'] = $schedule_id;
+        
+        $data['schedule_id'] = $schedule_id; 
+        
         $data['boarding_point'] = DB::table('launch_schedules')
                 ->select('terminals.*')
-                ->where('launch_schedules.id',$schedule_id)
-                ->join('terminals','launch_schedules.terminal_to','=','terminals.id')
+                ->where('launch_schedules.id', $schedule_id)
+                ->join('terminals', 'launch_schedules.terminal_to', '=', 'terminals.id')
                 ->get();
 //                echo '<pre>'; 
 //        print_r($data['boarding_point']);die;
@@ -104,9 +104,9 @@ class HomeController extends Controller {
         return response($html);
     }
 
-    public function get_rooms_price(Request $request){
+    public function get_rooms_price(Request $request) {
         $price = DB::table('rooms')
-                ->where('id',$request->room_id)
+                ->where('id', $request->room_id)
                 ->select('sell_price')
                 ->first();
         return response($price->sell_price);
