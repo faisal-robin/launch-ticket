@@ -49,7 +49,7 @@
                             <form method="post" action="{{url('admin/launch-schedules/'.$value->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you want to delete this!')" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
                     </tr>

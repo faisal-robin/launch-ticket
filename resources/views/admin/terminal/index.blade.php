@@ -35,7 +35,7 @@
                             <form method="post" action="{{url('admin/terminals/'.$value->id)}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button onclick="return confirm('Are you want to delete this!')" type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
 
                         </td>
@@ -144,11 +144,11 @@
 
             }
         }).done(function () {
-            $("#success_msg").html("Data Save Successfully");
-            document.getElementById('type_form').reset();
+            $("#success_msg").html("Data Save Successfully");  
             setTimeout(function () {
                  location.reload();
-            }, 2000);
+            }, 1000);
+         
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
             $.each(json_data.errors, function (key, value) {
@@ -165,7 +165,7 @@
 
         $.ajax({
             method: "GET",
-            url: "terminals/" + id + "/edit",
+            url: "terminals/"+id+"/edit",
             data: id,
             cache: false,
             contentType: false,
