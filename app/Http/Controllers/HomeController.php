@@ -12,6 +12,7 @@ use App\Models\LaunchSchedule;
 use App\Models\Launch;
 use App\Models\Room;
 use App\Models\Category;
+use App\Models\State;
 
 class HomeController extends Controller {
 
@@ -41,14 +42,14 @@ class HomeController extends Controller {
         $search = $request->search;
 
         if ($search == '') {
-            $get_terminal = Terminal::whereTerminalStatus('ACTIVE')->orderby('id', 'desc')->select('id', 'terminal_name')->limit(5)->get();
+            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('country_id',18)->limit(5)->get();
         } else {
-            $get_terminal = Terminal::orderby('id', 'desc')->select('id', 'terminal_name')->where('terminal_name', 'like', '%' . $search . '%')->limit(15)->get();
+            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('name', 'like', '%' . $search . '%')->where('country_id',18)->limit(15)->get();
         }
 
         $response = array();
-        foreach ($get_terminal as $terminal) {
-            $response[] = array("value" => $terminal->id, "label" => $terminal->terminal_name);
+        foreach ($get_states as $state) {
+            $response[] = array("value" => $state->id, "label" => $state->name);
         }
 
         return response()->json($response);
@@ -66,6 +67,11 @@ class HomeController extends Controller {
             $data['launch_schedules'] = [];
             session()->flash('schedule_departure_date', 'not_allow');
         } else {
+            $data['launch_schedules'] = DB::table('launch_schedules')
+                    ->where('terminal_from',$request->departure_from)
+                    ->where('terminal_to',$request->arrival_at)
+                    ->join('terminals','launch_schedules.schedule_id','=','launch_schedules')
+                    ->get();
             $data['launch_schedules'] = LaunchSchedule::where(['terminal_from' => $request->departure_from,
                         'terminal_to' => $request->arrival_at,
                         'schedule_date' => date("Y-m-d", strtotime($date))])

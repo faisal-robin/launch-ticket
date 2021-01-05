@@ -17,6 +17,7 @@
                     <tr>
                         <th>Sl</th>
                         <th>Terminal</th>
+                        <th>City</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -26,6 +27,7 @@
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td>{{$value->terminal_name}}</td>
+                        <td>{{$value->state->name}}</td>
                         <td>
 
                             <button data-id="{{$value->id}}" style="margin-right: 5px" type="button"  class="btn btn-success btn-sm float-left view_modal" >Edit</button>
@@ -68,6 +70,17 @@
                     <div class="form-group">
                         <label for="type_name">Terminal Name</label>
                         <input  type="text" class="form-control mb-4" name="terminal_name" id="terminal_name" placeholder="Terminal Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type_name">Select City</label>
+                        <select class="form-control" id="city_name" name="city_name">
+                             <option value="">Select</option>
+                            @foreach($state_list as $st_list)                           
+                            <option value="{{$st_list->id}}">{{$st_list->name}}</option>
+                            @endforeach
+                        </select>
+
                     </div>
 
                 </div>
@@ -134,7 +147,7 @@
             $("#success_msg").html("Data Save Successfully");
             document.getElementById('type_form').reset();
             setTimeout(function () {
-                document.location.reload();
+                 location.reload();
             }, 2000);
         }).fail(function (data, textStatus, jqXHR) {
             var json_data = JSON.parse(data.responseText);
@@ -152,7 +165,7 @@
 
         $.ajax({
             method: "GET",
-            url: "terminals/"+id+"/edit",
+            url: "terminals/" + id + "/edit",
             data: id,
             cache: false,
             contentType: false,
@@ -180,7 +193,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             method: "POST",
-            url: "terminals/"+id,
+            url: "terminals/" + id,
             data: data,
             cache: false,
             contentType: false,
@@ -229,6 +242,8 @@
             $('.subject_id').val('');
         });
     });
+
+    
 </script>
 
 <!-- /.box -->
