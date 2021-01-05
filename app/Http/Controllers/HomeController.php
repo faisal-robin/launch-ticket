@@ -66,14 +66,9 @@ class HomeController extends Controller {
         if ($date < date('Y-m-d')) {
             $data['launch_schedules'] = [];
             session()->flash('schedule_departure_date', 'not_allow');
-        } else {
-            $data['launch_schedules'] = DB::table('launch_schedules')
-                    ->where('terminal_from',$request->departure_from)
-                    ->where('terminal_to',$request->arrival_at)
-                    ->join('terminals','launch_schedules.schedule_id','=','launch_schedules')
-                    ->get();
-            $data['launch_schedules'] = LaunchSchedule::where(['terminal_from' => $request->departure_from,
-                        'terminal_to' => $request->arrival_at,
+        } else {        
+            $data['launch_schedules'] = LaunchSchedule::where(['from_state_id' => $request->departure_from,
+                        'to_state_id' => $request->arrival_at,
                         'schedule_date' => date("Y-m-d", strtotime($date))])
                     ->get();
         }
