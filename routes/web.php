@@ -101,5 +101,5 @@ Route::get('product/{any}', 'HomeController@product_details');
 Route::get('get-terminal', 'HomeController@get_terminal');
 Route::get('cabin/{any}', 'HomeController@get_cabin');
 Route::post('search-schedules', 'HomeController@search_schedules');
-Route::get('get-rooms-by-schdule', 'HomeController@get_rooms_by_schdule');
+Route::get('rooms-by-schdule', 'HomeController@get_rooms_by_schdule');
 
