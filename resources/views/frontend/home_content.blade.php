@@ -64,7 +64,7 @@
                                         <div role="tabpanel" class="tab-pane active" id="launch">
                                             <form action="{{url('search-schedules')}}" method="post" id="searchScheduleForm">
                                                 @csrf
-                                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="row">
                                                     <div class="col-lg-12 product-search-title">Book launch Room ( Vip,
                                                         Semi Vip, Normal, AC, Non AC )
@@ -83,37 +83,45 @@
 
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <label>Departure From</label><br>
-                                                         <input id="search_departure" type="text" class="form-control" placeholder="Where to source...">
-                                                         <input id="search_departure_id" name="search_departure_id" type="hidden" class="form-control" placeholder="Where to source...">
+                                                        <input id="search_departure" required type="text"  class="form-control" placeholder="Where to source...">
+                                                        <input id="departure_from" name="departure_from" type="hidden" class="form-control" placeholder="Where to source...">
+                                                        @error('departure_from')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <label>Arrival At</label><br>
-                                                         <input id="search_arrival" type="text" class="form-control" placeholder="Where to source...">
-                                                     <input id="search_arrival_id" name="search_arrival_id" type="hidden" class="form-control" placeholder="Where to source...">
+                                                        <input id="search_arrival" required type="text"  class="form-control" placeholder="Where to source...">
+                                                        <input id="arrival_at" name="arrival_at" type="hidden" class="form-control" placeholder="Where to source...">
+                                                        @error('arrival_at')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <label>Departure Date</label>
                                                         <div class="input-group">
 
-                                                            <input id="departure_date" name="departure_date" autocomplete="off"
+                                                            <input id="departure_date" required  name="departure_date" autocomplete="off"
                                                                    class="form-control" placeholder="MM/DD/YY"
                                                                    type="date" style="background-color: white;background: white">
-                                                           
+                                                            @error('departure_date')
+                                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="col-lg-3 col-sm-6 search-col-padding">
                                                         <button type="submit"
-                                                           class="search-button btn transition-effect" id="searchLaunch">
+                                                                class="search-button btn transition-effect" id="searchLaunch">
                                                             Search
                                                             launchs
                                                         </button>
-<!--                                                        <a type="submit"
-                                                           class="search-button btn transition-effect" id="searchLaunch">Search
-                                                            launchs
-                                                        </a>-->
+                                                        <!--                                                        <a type="submit"
+                                                                                                                   class="search-button btn transition-effect" id="searchLaunch">Search
+                                                                                                                    launchs
+                                                                                                                </a>-->
                                                     </div>
                                                     <div class="clearfix"></div>
                                                 </div>

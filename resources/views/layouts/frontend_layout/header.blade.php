@@ -1,5 +1,5 @@
 @inject('CommonTrait', 'App\Http\Controllers\UserAccountController')
-<!-- Header Top Area Start -->
+<!-- Header Top Area Start -->s
 <div class="header-top-area">
     <div class="container">
         <div class="row">

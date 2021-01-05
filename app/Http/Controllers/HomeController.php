@@ -54,19 +54,23 @@ class HomeController extends Controller {
         return response()->json($response);
     }
 
-    public function search_schedules(Request $request) {
+    public function search_schedules(Request $request) {        
+        $request->validate([
+            'departure_from' => 'required|max:255',
+            'arrival_at' => 'required|max:255',
+            'departure_date' => 'required|max:255'
+        ]);       
         $data['all_slider'] = Slider::all();
         $date = str_replace('/', '-', $request->departure_date);
         if ($date < date('Y-m-d')) {
+            $data['launch_schedules'] = [];
             session()->flash('schedule_departure_date', 'not_allow');
         } else {
-            $data['launch_schedules'] = LaunchSchedule::where(['terminal_from' => $request->search_departure_id,
-                        'terminal_to' => $request->search_arrival_id,
+            $data['launch_schedules'] = LaunchSchedule::where(['terminal_from' => $request->departure_from,
+                        'terminal_to' => $request->arrival_at,
                         'schedule_date' => date("Y-m-d", strtotime($date))])
                     ->get();
         }
-
-
 //        echo '<pre>'; 
 //        print_r($data['launch_schedules']);die;
         return view('frontend/schedule/schedule', $data);
