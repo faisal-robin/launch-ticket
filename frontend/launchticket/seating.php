@@ -132,8 +132,8 @@
                             <div class="row">
                                 <div class="col">
                                 <div style="background-color:#ddd;text-align: center;width: auto; height: 60px;padding: 15px; font-weight:700; font-size:24px;">
-                                ৳1000
-                                          </div>
+                                    ৳1000
+                                </div>
                                 </div>
                                 <br>
                                 <div class="col">

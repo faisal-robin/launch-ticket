@@ -112,4 +112,8 @@ class HomeController extends Controller {
         return response($price->sell_price);
     }
 
+    public function checkout(Request $request){
+        
+    }
+
 }
