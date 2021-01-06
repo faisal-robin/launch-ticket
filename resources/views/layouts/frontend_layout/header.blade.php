@@ -1,5 +1,5 @@
 @inject('CommonTrait', 'App\Http\Controllers\UserAccountController')
-<!-- Header Top Area Start -->s
+<!-- Header Top Area Start -->
 <div class="header-top-area">
     <div class="container">
         <div class="row">
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-lg-3 align-self-center">
                             <div class="site-logo">
-                                <a href="index.php">
+                                <a href="{{url('')}}">
                                     <img src="{{asset('storage')}}/app/@isset(company_info()->company_thumbnail){{company_info()->company_thumbnail}}@endisset" alt="abh" />
                                 </a>
                             </div>

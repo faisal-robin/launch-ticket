@@ -56,6 +56,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     //Users
     Route::post('user-list', 'Admin\UserController@user_list');
     Route::resource('users', 'Admin\UserController');
+    //Blog
+    Route::resource('blogs', 'Admin\BlogController');
     //Customers
     Route::resource('customers', 'Admin\CustomerController');
     Route::post('customer-list', 'Admin\CustomerController@customer_list');
@@ -67,6 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('launches', 'Admin\LaunchController');
     //Room
     Route::resource('rooms', 'Admin\RoomController');
+    Route::post('room-image-upload', 'Admin\RoomController@room_image_upload');
     Route::get('get-rooms', 'Admin\RoomController@get_rooms');
     // schedule 
     Route::resource('launch-schedules', 'Admin\LaunchScheduleController');
@@ -104,4 +107,6 @@ Route::post('search-schedules', 'HomeController@search_schedules');
 Route::get('rooms-by-schdule', 'HomeController@get_rooms_by_schdule');
 Route::get('room-price', 'HomeController@get_rooms_price');
 Route::post('checkout', 'HomeController@checkout');
+Route::get('room-list', 'HomeController@category_wise_rooms');
+Route::get('blog', 'HomeController@blog_details');
 

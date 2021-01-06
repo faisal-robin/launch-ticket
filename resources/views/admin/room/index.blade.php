@@ -18,6 +18,7 @@
                         <th>Sl</th>
                         <th>Room</th>
                         <th>Launch</th>
+                        <th>Category</th>
                         <th>Purchase Price</th>
                         <th>Sell Price</th>
                         <th>Action</th>
@@ -30,6 +31,7 @@
                         <td>{{$key + 1}}</td>
                         <td>{{$value->room_no}}</td>
                         <td>{{$value->launch_info->launch_name}}</td>
+                        <td>{{$value->category_info->category_name}}</td>
                         <td>
                             {{ $value->purchase_price }}
                         </td>
@@ -91,6 +93,19 @@
                             <label for="type_name">Room No</label>
                             <input  type="text" class="form-control mb-4" name="room_no" id="room_no" placeholder="Room No">
                         </div> 
+                        
+                          <!-- /.form-group -->
+                           <div class="form-group col-12">
+                                        <div id="myId" class="dropzone" style="text-align: center;">
+                                            <i class="fa fa-camera" style="font-size: 60px;color: #bbcdd2;"></i>
+                                            <br>Drop images here
+                                            <br>
+                                            <strong>or select files</strong>
+                                            <br>
+                                            <small>Recommended size 800 x 800px for default theme.<br>JPG, GIF or PNG format.</small>
+                                        </div>
+                                        </div>
+                                        <!-- /.form-group -->
 
                         <div class="form-group col-md-6">
                             <label for="purchase_price">Purchase Price</label>
@@ -141,7 +156,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width: 880px">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalTable">Edit Client category</h5>
+                <h5 class="modal-title" id="editModalTable">Edit Room</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -162,6 +177,22 @@
 </div>
 
 <script type="text/javascript">
+     if($("#myId").length) {
+        var myDropzone = new Dropzone("div#myId", {
+            addRemoveLinks: true,
+            url: "{{ url('admin/room-image-upload') }}",
+            maxFilesize: 2000,
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            init: function() {
+            },
+            success: function (file, response) {
+                $('form#room_form').append('<input type="hidden" name="images_name[]" value="' + response + '">')
+            }
+        });
+    }
+  
     $(".room-add").click(function () {
         $(".error_msg").html('');
         var data = new FormData($('#room_form')[0]);
