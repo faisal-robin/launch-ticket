@@ -84,7 +84,7 @@ class CategoryController extends Controller {
 
 //     Start   Category Thumbnail
         $file = $request->file('category_cover_image')->hashName();
-        $resize = Image::make($request->file('category_cover_image'))->resize(600, 200, function ($constraint) {
+        $resize = Image::make($request->file('category_cover_image'))->resize(600, 400, function ($constraint) {
                     
                 })->encode('jpg');
 
@@ -151,7 +151,7 @@ class CategoryController extends Controller {
             $category->category_cover_image = $cover_photo;
 
             $file = $request->file('category_cover_image')->hashName();
-            $resize = Image::make($request->file('category_cover_image'))->resize(600, 200, function ($constraint) {
+            $resize = Image::make($request->file('category_cover_image'))->resize(600, 400, function ($constraint) {
                         
                     })->encode('jpg');
 

@@ -160,7 +160,7 @@
 
                         <div class="col-lg-7 align-self-center">
                             <div class="hotline-number">
-                                <i class="fa fa-phone"></i>+8809638336699
+                                <i class="fa fa-phone"></i> @isset(company_info()->company_phone){{company_info()->company_phone}}@endisset
                             </div>
                         </div>
                     </div>
@@ -258,86 +258,19 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="destination-slider owl-carousel">
+                    @foreach($all_category as $v_category)
                     <div class="single-destination">
-                        <a href="hotel-details.php">
+                        <a href="{{url('room-list?category='.$v_category->slug)}}">
                             <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-1.jpg" alt="destination" />
+                                <img src="{{asset('storage/app/'.$v_category->category_thumbnail)}}" style=""width="521" height="313" alt="destination" />
                                 <div class="destination-title">
-                                    <h3>Semi VIP</h3>
+                                    <h3>{{$v_category->category_name}}</h3>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="single-destination">
-                        <a href="hotel-details.php">
-                            <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-2.jpg" alt="destination" />
-                                <div class="destination-title">
-                                    <h3>Family AC</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="single-destination">
-                        <a href="hotel-details.php">
-                            <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-3.jpg" alt="destination" />
-                                <div class="destination-title">
-                                    <h3>VIP</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="single-destination">
-                        <a href="hotel-details.php">
-                            <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-4.jpg" alt="destination" />
-                                <div class="destination-title">
-                                    <h3>Single N/AC</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="single-destination">
-                        <a href="hotel-details.php">
-                            <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-5.jpg" alt="destination" />
-                                <div class="destination-title">
-                                    <h3>Double N/AC</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="single-destination">
-                        <a href="hotel-details.php">
-                            <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-6.jpg" alt="destination" />
-                                <div class="destination-title">
-                                    <h3>Deluxe Cabin</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="single-destination">
-                        <a href="hotel-details.php">
-                            <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-3.jpg" alt="destination" />
-                                <div class="destination-title">
-                                    <h3>Double AC</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="single-destination">
-                        <a href="hotel-details.php">
-                            <div class="destination-image">
-                                <img src="{{asset('public')}}/frontend_asset/img/destination-4.jpg" alt="destination" />
-                                <div class="destination-title">
-                                    <h3>SOFA</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -454,63 +387,26 @@
             </div>
         </div>
         <div class="row">
+            @foreach($all_blog as $v_blog)
             <div class="col-lg-4">
                 <div class="single-blog-item">
                     <div class="blog-image">
-                        <a href="blog.html">
-                            <img src="{{asset('public')}}/frontend_asset/img/blog-2.jpg" alt="blog" />
+                        <a href="{{url('blog?id='.$v_blog->id)}}">
+                            <img src="{{asset('storage/app/'.$v_blog->image_source)}}" style="height: 230px;" alt="blog" />
                         </a>
                     </div>
                     <div class="blog-desc">
                         <div class="post-meta">
-                            <p class="date">20 jan, 2020</p>
+                            <p class="date">{{$v_blog->date}}</p>
                         </div>
-                        <h3><a href="single-blog.html">Lorem ipsum dolor sit</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available but the majority have suffered
-                            alteration...</p>
-                        <a href="#" class="btn-link readmore">Read more <span><i
+                        <h3><a href="{{url('blog?id='.$v_blog->id)}}">{{$v_blog->title}}</a></h3>
+                        <p>{!!$v_blog->short_summary!!}</p>
+                        <a href="{{url('blog?id='.$v_blog->id)}}" class="btn-link readmore">Read more <span><i
                                     class="fa fa-arrow-right"></i></span></a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="single-blog-item">
-                    <div class="blog-image">
-                        <a href="blog.html">
-                            <img src="{{asset('public')}}/frontend_asset/img/blog-1.jpg" alt="blog" />
-                        </a>
-                    </div>
-                    <div class="blog-desc">
-                        <div class="post-meta">
-                            <p class="date">20 jan, 2020</p>
-                        </div>
-                        <h3><a href="single-blog.html">Lorem ipsum dolor sit.</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available but the majority have suffered
-                            alteration...</p>
-                        <a href="#" class="btn-link readmore">Read more <span><i
-                                    class="fa fa-arrow-right"></i></span></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="single-blog-item">
-                    <div class="blog-image">
-                        <a href="blog.html">
-                            <img src="{{asset('public')}}/frontend_asset/img/blog-3.jpg" alt="blog" />
-                        </a>
-                    </div>
-                    <div class="blog-desc">
-                        <div class="post-meta">
-                            <p class="date">20 jan, 2020</p>
-                        </div>
-                        <h3><a href="single-blog.html">Lorem ipsum dolor sit</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available but the majority have suffered
-                            alteration...</p>
-                        <a href="#" class="btn-link readmore">Read more <span><i
-                                    class="fa fa-arrow-right"></i></span></a>
-                    </div>
-                </div>
-            </div>
+          @endforeach
         </div>
     </div>
 </section>

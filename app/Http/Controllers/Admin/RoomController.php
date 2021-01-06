@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\Launch;
 use App\Models\Category;
 use DB;
+use Illuminate\Support\Facades\File;
 
 class RoomController extends Controller {
 
@@ -82,6 +83,13 @@ class RoomController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function room_image_upload(Request $request) {
+        //        echo '<pre>';print_r($request->file('file'));die;
+        $upload_folder = 'rooms';
+        $path = $request->file('file')->storeAs($upload_folder, $request->file('file')->getClientOriginalName());
+        return $path;
+    }
+
     public function store(Request $request) {
 
         $request->validate([
@@ -107,6 +115,22 @@ class RoomController extends Controller {
                 $data_category['room_id'] = $room->id;
                 $data_category['category_id'] = $value;
                 DB::table('room_categories')->insert($data_category);
+            }
+        }
+
+        $data_image = array();
+        $i = 0;
+        if ($request->images_name) {
+            foreach ($request->images_name as $row) {
+                $data_image['room_id'] = $room->id;
+                $data_image['image_source'] = $row;
+                if ($i == 0) {
+                    $data_image['is_main_image'] = 1;
+                }else{                   
+                $data_image['is_main_image'] = 0; 
+                }
+                DB::table('room_images')->insert($data_image);
+                $i++;
             }
         }
     }
@@ -183,6 +207,29 @@ class RoomController extends Controller {
                 $data_category['room_id'] = $room->id;
                 $data_category['category_id'] = $value;
                 DB::table('room_categories')->insert($data_category);
+            }
+        }
+
+        $data_image = array();
+        $i = 0;
+        if ($request->images_name) {
+            $previous_images = DB::table('room_images')->where('room_id', $room->id)->get();
+            foreach ($previous_images as $rowImage) {
+                if (File::exists('storage/app/rooms/' . $rowImage->image_source)) {
+                    File::delete('storage/app/rooms/' . $rowImage->image_source);
+                }
+            }
+            DB::table('room_images')->where('room_id', $room->id)->delete();
+            foreach ($request->images_name as $row) {
+                $data_image['room_id'] = $room->id;
+                $data_image['image_source'] = $row;
+                if ($i == 0) {
+                    $data_image['is_main_image'] = 1;
+                }else{                    
+                $data_image['is_main_image'] = 0;
+                }
+                DB::table('room_images')->insert($data_image);
+                $i++;
             }
         }
     }

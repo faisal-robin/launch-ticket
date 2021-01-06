@@ -157,6 +157,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             @endif
+                            
+                             <li class="nav-item">
+                                <a href="{{url('admin/blogs')}}" class="nav-link">
+                                    <i class="fas fa-users-cog nav-icon"></i>
+                                    <p>
+                                        Blogs
+                                    </p>
+                                </a>
+                            </li>
 
                             @if($user->hasRole('super-admin'))
                             <li class="nav-item has-treeview">

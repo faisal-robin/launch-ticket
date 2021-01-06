@@ -13,6 +13,7 @@ use App\Models\Launch;
 use App\Models\Room;
 use App\Models\Category;
 use App\Models\State;
+use App\Models\Blog;
 
 class HomeController extends Controller {
 
@@ -28,6 +29,8 @@ class HomeController extends Controller {
     public function index() {
         $data['all_slider'] = Slider::all();
         $data['all_terminal'] = Terminal::whereTerminalStatus('ACTIVE')->get();
+        $data['all_blog'] = Blog::whereStatus('ACTIVE')->get();
+        $data['all_category'] = Category::all();
 //        echo '<pre>'; 
 //        print_r($data['all_terminal']);die;
         return view('frontend/home_content', $data);
@@ -110,6 +113,29 @@ class HomeController extends Controller {
                 ->select('sell_price')
                 ->first();
         return response($price->sell_price);
+    }
+    
+    public function category_wise_rooms(Request $request) {
+      $data['ctg_info'] = Category::whereSlug($request->category)
+              ->get(); 
+      $data['category_rooms'] = Room::whereMainCategory($data['ctg_info'][0]->id)
+              ->limit(15)
+              ->get();
+//       echo '<pre>'; 
+//      foreach ($data['category_rooms'] as $row){
+//         if(isset($row->room_images[0])){
+//             print_r($row->room_images[0]);
+//         }
+//      }
+      
+//        print_r($data['category_rooms']);die;
+//      die; 
+       return view('frontend/category_room/category_wise_rooms', $data);
+    }
+    
+    public function blog_details(Request $request) {
+      $data['blog_data'] = Blog::find($request->id);
+      return view('frontend/blog/blog_details', $data);
     }
 
 }
