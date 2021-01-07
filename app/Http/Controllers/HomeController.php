@@ -143,4 +143,8 @@ class HomeController extends Controller {
         return view('frontend/blog/blog_details', $data);
         }
 
+    public function checkout(Request $request){
+        
+    }
+
 }

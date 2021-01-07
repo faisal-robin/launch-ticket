@@ -44,11 +44,17 @@
 
                         <div class="col-lg-8 offest-2" align-self-center">
                             <form action="{{url('checkout')}}" method="GET">
+
+                        <div class="col-lg-5 align-self-center">
+                        <form action="{{ url(checkout) }}" type="post">
+
                             <div class="cabin-details">
                                 <div class="row">
                                     <div class="col">                                      
                                             <label>Cabin type</label>
-                                            <select class="form-control" class="wide" name="category" id="category_info"> 
+
+                                            <select class="form-control" class="wide" name="category_id" id="category_info"> 
+
                                                 <option value="">Select Category</option>
                                                 @foreach($all_category as $v_category)
                                                 <option value="{{$v_category->id}}">{{$v_category->category_name}}</option>
@@ -65,6 +71,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="cabin-type">Boarding Point*</label>
+
                                         <select class="form-control" class="wide" name="boarding_point">
                                             @foreach($boarding_point as $row)
                                             <option value="{{$row->id}}">{{$row->terminal_name}}</option>
@@ -80,7 +87,8 @@
                                     </div>
                                     <br>
                                     <div class="col">
-                                        <button type="submit" class="search-button btn transition-effect">Continue
+
+                                        <button  type="submit" class="search-button btn transition-effect">Continue
                                         </button>
                                     </div>
                                 </div>
@@ -106,7 +114,6 @@
             data: {schedule_id: schedule_id,category_id:catId},
             method: 'GET',
             success: function (response) {
-                console.log(response);
              $('#cabin_info').html(response);
             }
         });
@@ -119,7 +126,7 @@
             data: {room_id: room_id},
             method: 'GET',
             success: function (response) {
-             $('#price').text(response);
+             $('#price').text('৳'+response);
             }
         });
     });
