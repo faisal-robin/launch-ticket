@@ -137,7 +137,7 @@
                         </div>
 
                     </div>
-                    <div id="successMsg" class="text-center p-2" style="color: white;height: 25px;background-color: graytext;display: none"></div>
+                    <div id="successMsg" class="text-center p-2" style="color: white;height: 35px;background-color: graytext;display: none"></div>
                     <div class="action-btn">
                         <button style="cursor: grab" class="abh-btn" id="proceedToPay">Proceed to Pay</button>
                         <!--<a class="abh-btn" id="proceedToPay">Proceed to Pay</a>-->
@@ -154,7 +154,7 @@
         $(".error_msg").html('');
         let data = $('#customerForm').serialize();
         $.ajax({
-            url: '{{url('add - customer')}}',
+            url: '{{url('add-customer')}}',
             method: 'POST',
             data: data,
             success: function (response) {

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-//use Faker\Provider\Image;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\LaunchSchedule;
@@ -69,7 +68,6 @@ class LaunchScheduleController extends Controller {
         $launch_schedule->schedule_time = $request->schedule_time;
         $launch_schedule->created_by = Auth::user()->id;
         $launch_schedule->save();
-
 
         if ($launch_schedule->id) {
             $data_room = array();
