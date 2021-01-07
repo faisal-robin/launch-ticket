@@ -119,17 +119,17 @@ class HomeController extends Controller {
       $data['ctg_info'] = Category::whereSlug($request->category)
               ->get(); 
       $data['category_rooms'] = Room::whereMainCategory($data['ctg_info'][0]->id)
-              ->limit(15)
+              ->limit(10)
               ->get();
-//       echo '<pre>'; 
-//      foreach ($data['category_rooms'] as $row){
-//         if(isset($row->room_images[0])){
-//             print_r($row->room_images[0]);
-//         }
-//      }
-      
-//        print_r($data['category_rooms']);die;
-//      die; 
+      $data['related_category_rooms'] = DB::table('categories')->whereParentId(null)              
+              ->leftJoin('rooms','categories.id','=','rooms.main_category')
+              ->select('rooms.room_no','rooms.sell_price as room_sell_price','rooms.id as room_id','categories.*')
+              ->limit(6)
+              ->groupBy('categories.id')
+              ->get();
+//        echo '<pre>'; //        
+//         print_r($data['related_category_rooms']);  
+//        die; 
        return view('frontend/category_room/category_wise_rooms', $data);
     }
     
@@ -137,5 +137,10 @@ class HomeController extends Controller {
       $data['blog_data'] = Blog::find($request->id);
       return view('frontend/blog/blog_details', $data);
     }
+    
+    public function checkout(Request $request) {
+        echo $request->category.'room'.$request->room.'boarding-point'.$request->boarding_point;die;
+        return view('frontend/blog/blog_details', $data);
+        }
 
 }

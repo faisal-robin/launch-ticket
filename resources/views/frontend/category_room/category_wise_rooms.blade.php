@@ -35,15 +35,12 @@
                     <div class="details-slider owl-carousel">                       
                         @foreach($category_rooms as $key=>$value)
                         <div class="single-destination">
-                            <a href="#">
+                            <a href="{{url('room-list?category='.$value->slug)}}">
                                 <div class="destination-image">
                                     <img class="img-fluid" src="@if(isset($value->room_images[0])) {{url('storage/app/'.$value->room_images[0]->image_source)}} @endif" style="height: 360px;" alt="destination" />
                                 </div>
                             </a>
                         </div>
-                        @if($key == 5)
-                        @break;
-                        @endif
                         @endforeach
                     </div>                    
                 </div>
@@ -59,11 +56,11 @@
                                             Description</a>
                                     </li>
 
-<!--
-                                    <li>
-                                        <a class="" data-toggle="tab" href="#facilities" role="tab"
-                                           aria-controls="facilities" aria-selected="false"> Facilities</a>
-                                    </li>-->
+                                    <!--
+                                                                        <li>
+                                                                            <a class="" data-toggle="tab" href="#facilities" role="tab"
+                                                                               aria-controls="facilities" aria-selected="false"> Facilities</a>
+                                                                        </li>-->
 
 
                                     <!-- <li>
@@ -84,25 +81,25 @@
                             <div id="hotel-description" class="tab-pane show active">
 
                                 <div class="tab-details-inner">
-                                  {!!$ctg_info[0]->category_description!!}
+                                    {!!$ctg_info[0]->category_description!!}
                                 </div>
 
                             </div>
-<!--                            <div id="facilities" class="tab-pane">
-
-                                <div class="tab-details-inner">
-                                    <p>Food not included with package price for Makkah / Madinah (where not
-                                        specified), but
-                                        available at hotel or restaurant (approx. SR10/per lunch or dinner and
-                                        SR5/per breakfast).
-                                        Food Menu - Breakfast: Paratha / Ruti, Dall / Eggs / Vegetable, Lunch &
-                                        Diner: Chicken /
-                                        Fish, Vegetable / Vorta / Shak, Dall, Plain Rice.
-
-                                        Any kinds of personal cost or others which are not mentioned above.</p>
-                                </div>
-
-                            </div>-->
+                            <!--                            <div id="facilities" class="tab-pane">
+                            
+                                                            <div class="tab-details-inner">
+                                                                <p>Food not included with package price for Makkah / Madinah (where not
+                                                                    specified), but
+                                                                    available at hotel or restaurant (approx. SR10/per lunch or dinner and
+                                                                    SR5/per breakfast).
+                                                                    Food Menu - Breakfast: Paratha / Ruti, Dall / Eggs / Vegetable, Lunch &
+                                                                    Diner: Chicken /
+                                                                    Fish, Vegetable / Vorta / Shak, Dall, Plain Rice.
+                            
+                                                                    Any kinds of personal cost or others which are not mentioned above.</p>
+                                                            </div>
+                            
+                                                        </div>-->
                             <!-- <div id="hotel-itinerary" class="tab-pane">
 
                                 <div class="tab-details-inner">
@@ -156,45 +153,45 @@
                 </div>
                 <div class="hotel-room-area">
                     <div class="row">
-<!--                        <div class="col-lg-5 pad-right-0">
-                            <div class="hotel-img-inner hotel-room-img-style-1">
-                                <div class="price">
-                                    <span class="price-num"> ৳ 9000 </span>
-                                     <span class="price-night-text"> / night </span> 
-                                </div>
-                                <a href="assets/img/hotel-room1.jpg" class="popup-img">
-                                    <img class="img-fluid" src="assets/img/hotel-room1.jpg" alt="Hotel Room" />
-                                </a>
-                                <div class="room-name">
-                                    <h3>VIP Room- (Sakura)</h3>
-                                </div>
-                            </div>
-                        </div>-->
-                        <div class="col-lg-7">
+                        <!--                        <div class="col-lg-5 pad-right-0">
+                                                    <div class="hotel-img-inner hotel-room-img-style-1">
+                                                        <div class="price">
+                                                            <span class="price-num"> ৳ 9000 </span>
+                                                             <span class="price-night-text"> / night </span> 
+                                                        </div>
+                                                        <a href="assets/img/hotel-room1.jpg" class="popup-img">
+                                                            <img class="img-fluid" src="assets/img/hotel-room1.jpg" alt="Hotel Room" />
+                                                        </a>
+                                                        <div class="room-name">
+                                                            <h3>VIP Room- (Sakura)</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+                        <div class="col-lg-12">
                             <div class="hotel-four-room-inner">
                                 <div class="row">
-                                      @foreach($category_rooms as $key=>$value)
-                                      @if($key>5)
-                                    <div class="col-lg-6">
+                                    @foreach($related_category_rooms as $key=>$value)
+                                    <div class="col-lg-4">
                                         <div class="hotel-img-inner">
                                             <div class="price">
-                                                <span class="price-num"> ৳ {{$value->sell_price}}  </span>
+                                                <span class="price-num"> ৳ {{$value->room_sell_price}}  </span>
                                                 <!-- <span class="price-night-text"> / night </span> -->
                                             </div>
-                                             @if(isset($value->room_images[0]))
-                                            <a href="{{url('storage/app/'.$value->room_images[0]->image_source)}}" class="popup-img">
-                                               
-                                                <img class="img-fluid" src=" {{url('storage/app/'.$value->room_images[0]->image_source)}}"
+                                            @if(isset($value->category_cover_image))
+                                            <a href="{{url('storage/app/'.$value->category_cover_image)}}" class="popup-img">
+
+                                                <img class="img-fluid" src=" {{url('storage/app/'.$value->category_cover_image)}}"
                                                      alt="Hotel Room" />
-                                                
+
                                             </a>
-                                              @endif
-                                            <div class="room-name">
-                                                <h3>{{$ctg_info[0]->category_name}}</h3>
-                                            </div>
+                                            @endif
+                                            <a href="{{url('room-list?category='.$value->slug)}}">
+                                                <div class="room-name">
+                                                    <h3>{{$value->category_name}}</h3>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
-                                      @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -211,11 +208,11 @@
                             <h4>For Telephone booking service</h4>
                             <p>
                                 <i class="fa fa-phone"></i>
-                                 @isset(company_info()->company_phone){{company_info()->company_phone}}@endisset
+                                @isset(company_info()->company_phone){{company_info()->company_phone}}@endisset
                             </p>
                             <p>
                                 <i class="fa fa-envelope"></i>
-                               @isset(company_info()->company_email){{company_info()->company_email}}@endisset
+                                @isset(company_info()->company_email){{company_info()->company_email}}@endisset
                             </p>
                         </div>
                     </div>

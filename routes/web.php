@@ -108,4 +108,5 @@ Route::get('rooms-by-schdule', 'HomeController@get_rooms_by_schdule');
 Route::get('room-price', 'HomeController@get_rooms_price');
 Route::get('room-list', 'HomeController@category_wise_rooms');
 Route::get('blog', 'HomeController@blog_details');
+Route::get('checkout', 'HomeController@checkout');
 

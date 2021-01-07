@@ -26,80 +26,29 @@
             <div class="seat-availability-starts">
                 <div class="content-starts">
                     <div class="row justify-content-between">
-                        <div class="col-lg-5">
+<!--                        <div class="col-lg-5">
                             <p class="div-header-shortnote">Maximum of 2 cabins can be booked per ticket.</p>
                             <table class="price-list">
+                                
+                                
+                                
                                 <tr style="background-color: #f97250;">
                                     <td width="40%">Cabin Type</td>
-                                    <td width="10%">Seats</td>
                                     <td width="30%">Cabin Fare</td>
                                     <td width="20%">Availability</td>
                                 </tr>
-                                <tr>
-                                    <td width="40%">Single AC</td>
-                                    <td width="10%">1</td>
-                                    <td width="30%">1000</td>
-                                    <td width="20%">12</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">Single Non AC</td>
-                                    <td width="10%">1</td>
-                                    <td width="30%">900</td>
-                                    <td width="20%">11</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">Double AC</td>
-                                    <td width="10%">2</td>
-                                    <td width="30%">1800</td>
-                                    <td width="20%">5</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">Double Non AC</td>
-                                    <td width="10%">2</td>
-                                    <td width="30%">1600</td>
-                                    <td width="20%">5</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">Family AC</td>
-                                    <td width="10%">3</td>
-                                    <td width="30%">2700</td>
-                                    <td width="20%">5</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">Family Non AC</td>
-                                    <td width="10%">3</td>
-                                    <td width="30%">2400</td>
-                                    <td width="20%">5</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">VIP Single</td>
-                                    <td width="10%">1</td>
-                                    <td width="30%">4000</td>
-                                    <td width="20%">11</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">VIP Double</td>
-                                    <td width="10%">2</td>
-                                    <td width="30%">5000</td>
-                                    <td width="20%">2</td>
-                                </tr>
-                                <tr>
-                                    <td width="40%">VIP Family</td>
-                                    <td width="10%">3</td>
-                                    <td width="30%">5500</td>
-                                    <td width="20%">4</td>
-                                </tr>
-
+                               
+                               
                             </table>
-                        </div>
+                        </div>-->
 
-                        <div class="col-lg-5 align-self-center">
-                            <form>
+                        <div class="col-lg-8 offest-2" align-self-center">
+                            <form action="{{url('checkout')}}" method="GET">
                             <div class="cabin-details">
                                 <div class="row">
                                     <div class="col">                                      
                                             <label>Cabin type</label>
-                                            <select class="form-control" class="wide" name="" id="category_info"> 
+                                            <select class="form-control" class="wide" name="category" id="category_info"> 
                                                 <option value="">Select Category</option>
                                                 @foreach($all_category as $v_category)
                                                 <option value="{{$v_category->id}}">{{$v_category->category_name}}</option>
@@ -108,7 +57,7 @@
                                     </div>
                                     <div class="col">
                                         <label>Select Cabin</label>
-                                        <select class="form-control"  name="room_id" id="cabin_info">
+                                        <select class="form-control"  name="room" id="cabin_info">
                                             <option value="">Select Cabin</option>
                                         </select>
                                     </div>
@@ -116,7 +65,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="cabin-type">Boarding Point*</label>
-                                        <select class="form-control" class="wide">
+                                        <select class="form-control" class="wide" name="boarding_point">
                                             @foreach($boarding_point as $row)
                                             <option value="{{$row->id}}">{{$row->terminal_name}}</option>
                                            @endforeach
@@ -131,8 +80,8 @@
                                     </div>
                                     <br>
                                     <div class="col">
-                                        <a href="#" type="submit" class="search-button btn transition-effect">Continue
-                                        </a>
+                                        <button type="submit" class="search-button btn transition-effect">Continue
+                                        </button>
                                     </div>
                                 </div>
                                 <br>
