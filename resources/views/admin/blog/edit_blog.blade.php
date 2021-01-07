@@ -39,11 +39,11 @@
                         </div>
                     </div>                    
 
-                    <div class="form-group col-md-10">
+                    <div class="form-group col-md-12">
                         <label for="Name">Title</label>
                         <input type="text" class="form-control" value="{{$blog_info->title}}" name="title" id="title" placeholder="Enter Title">
                     </div>
-                    <div class="col-md-2"></div>
+                    
                     <div class="form-group col-11">
                         <label for="type_name">Short Summary</label>
                         <textarea class="summernote" name="short_summary"  placeholder="">{!!$blog_info->short_summary!!}</textarea>                          
