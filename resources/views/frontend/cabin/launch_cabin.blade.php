@@ -46,14 +46,14 @@
                             <form action="{{url('checkout')}}" method="GET">
 
                         <div class="col-lg-5 align-self-center">
-                        <form action="{{ url(checkout) }}" type="post">
+                        <form action="{{ url('checkout') }}" type="post">
 
                             <div class="cabin-details">
                                 <div class="row">
                                     <div class="col">                                      
                                             <label>Cabin type</label>
 
-                                            <select class="form-control" class="wide" name="category_id" id="category_info"> 
+                                            <select class="form-control" class="wide" name="category" id="category_info"> 
 
                                                 <option value="">Select Category</option>
                                                 @foreach($all_category as $v_category)
@@ -79,6 +79,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <input type="hidden" value="{{$schedule_id}}" name="schedule">
                                 <br><br>
                                 <div class="row">
                                     <div class="col">

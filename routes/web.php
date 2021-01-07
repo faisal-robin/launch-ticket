@@ -107,6 +107,7 @@ Route::post('search-schedules', 'HomeController@search_schedules');
 Route::get('rooms-by-schdule', 'HomeController@get_rooms_by_schdule');
 Route::get('room-price', 'HomeController@get_rooms_price');
 Route::post('checkout', 'HomeController@checkout');
+Route::post('add-customer', 'HomeController@add_customer');
 Route::get('room-list', 'HomeController@category_wise_rooms');
 Route::get('blog', 'HomeController@blog_details');
 Route::get('checkout', 'HomeController@checkout');

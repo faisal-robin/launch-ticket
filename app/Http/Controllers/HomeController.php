@@ -25,11 +25,13 @@ class HomeController extends Controller {
     public function __construct() {
 //        $this->middleware('auth');
     }
- 
+
     public function index() {
         $data['all_slider'] = Slider::all();
-        $data['all_terminal'] = Terminal::whereTerminalStatus('ACTIVE')->get();
-        $data['all_blog'] = Blog::whereStatus('ACTIVE')->get();
+        $data['all_terminal'] = Terminal::whereTerminalStatus('ACTIVE')
+                ->get();
+        $data['all_blog'] = Blog::whereStatus('ACTIVE')
+                ->get();
         $data['all_category'] = Category::all();
 //        echo '<pre>'; 
 //        print_r($data['all_terminal']);die;
@@ -40,9 +42,18 @@ class HomeController extends Controller {
         $search = $request->search;
 
         if ($search == '') {
-            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('country_id', 18)->limit(5)->get();
+            $get_states = State::orderby('id', 'desc')
+                    ->select('id', 'name')
+                    ->where('country_id', 18)
+                    ->limit(5)
+                    ->get();
         } else {
-            $get_states = State::orderby('id', 'desc')->select('id', 'name')->where('name', 'like', '%' . $search . '%')->where('country_id', 18)->limit(15)->get();
+            $get_states = State::orderby('id', 'desc')
+                    ->select('id', 'name')
+                    ->where('name', 'like', '%' . $search . '%')
+                    ->where('country_id', 18)
+                    ->limit(15)
+                    ->get();
         }
 
         $response = array();
@@ -58,12 +69,12 @@ class HomeController extends Controller {
             'departure_from' => 'required',
             'arrival_at' => 'required',
             'departure_date' => 'required'
-        ]); 
-        
+        ]);
+
         $data['all_slider'] = Slider::all();
         $date = str_replace('/', '-', $request->departure_date);
-        $data['launch_schedules'] = []; 
-        
+        $data['launch_schedules'] = [];
+
         if ($date < date('Y-m-d')) {
             session()->flash('schedule_departure_date', 'not_allow');
         } else {
@@ -80,9 +91,9 @@ class HomeController extends Controller {
 
     public function get_cabin($schedule_id) {
         $data['all_category'] = Category::all();
-        
-        $data['schedule_id'] = $schedule_id; 
-        
+
+        $data['schedule_id'] = $schedule_id;
+
         $data['boarding_point'] = DB::table('launch_schedules')
                 ->select('terminals.*')
                 ->where('launch_schedules.id', $schedule_id)
@@ -114,37 +125,57 @@ class HomeController extends Controller {
                 ->first();
         return response($price->sell_price);
     }
-    
+
     public function category_wise_rooms(Request $request) {
-      $data['ctg_info'] = Category::whereSlug($request->category)
-              ->get(); 
-      $data['category_rooms'] = Room::whereMainCategory($data['ctg_info'][0]->id)
-              ->limit(10)
-              ->get();
-      $data['related_category_rooms'] = DB::table('categories')->whereParentId(null)              
-              ->leftJoin('rooms','categories.id','=','rooms.main_category')
-              ->select('rooms.room_no','rooms.sell_price as room_sell_price','rooms.id as room_id','categories.*')
-              ->limit(6)
-              ->groupBy('categories.id')
-              ->get();
+        $data['ctg_info'] = Category::whereSlug($request->category)
+                ->get();
+        $data['category_rooms'] = Room::whereMainCategory($data['ctg_info'][0]->id)
+                ->limit(10)
+                ->get();
+        $data['related_category_rooms'] = DB::table('categories')->whereParentId(null)
+                ->leftJoin('rooms', 'categories.id', '=', 'rooms.main_category')
+                ->select('rooms.room_no', 'rooms.sell_price as room_sell_price', 'rooms.id as room_id', 'categories.*')
+                ->limit(6)
+                ->groupBy('categories.id')
+                ->get();
 //        echo '<pre>'; //        
 //         print_r($data['related_category_rooms']);  
 //        die; 
-       return view('frontend/category_room/category_wise_rooms', $data);
+        return view('frontend/category_room/category_wise_rooms', $data);
     }
-    
-    public function blog_details(Request $request) {
-      $data['blog_data'] = Blog::find($request->id);
-      return view('frontend/blog/blog_details', $data);
-    }
-    
-    public function checkout(Request $request) {
-        echo $request->category.'room'.$request->room.'boarding-point'.$request->boarding_point;die;
-        return view('frontend/blog/blog_details', $data);
-        }
 
-    public function checkout(Request $request){
-        
+    public function blog_details(Request $request) {
+        $data['blog_data'] = Blog::find($request->id);
+        return view('frontend/blog/blog_details', $data);
+    }
+
+    public function checkout(Request $request) {
+//        echo $request->category.'room'.$request->room.'boarding-point'.$request->boarding_point;die;
+        $data['room_details'] = Room::find($request->room);
+        $data['boarding_terminal'] = Terminal::find($request->boarding_point);
+        $data['schedule_details'] = LaunchSchedule::where('launch_schedules.id', $request->schedule)
+                ->join('terminals', 'launch_schedules.terminal_from', '=', 'terminals.id')
+                ->get();
+//        echo '<pre>'; print_r($data['schedule_details']);die;
+        return view('frontend/checkout/checkout', $data);
+    }
+
+    public function add_customer(Request $request) {
+        $validationArray['customer_first_name'] = 'required';
+        $validationArray['customer_last_name'] = 'required';
+        $validationArray['customer_email'] = 'required|unique:customers|email';
+        $validationArray['customer_phone'] = 'required|unique:customers';
+        $this->validate($request, $validationArray);
+        $data['customer_first_name'] = $request->input('customer_first_name');
+        $data['customer_last_name'] = $request->input('customer_last_name');
+        $data['customer_postal_code'] = "";
+        $data['customer_code'] = "";
+        $data['password'] = "";
+        $data['customer_email'] = $request->input('customer_email');
+        $data['customer_phone'] = $request->input('customer_phone');
+        $data['customer_address'] = $request->input('customer_address');
+        $data['customer_status'] = 1;
+        Customer::insert($data);
     }
 
 }

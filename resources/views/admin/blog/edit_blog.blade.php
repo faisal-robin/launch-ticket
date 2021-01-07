@@ -32,7 +32,7 @@
                         </div>
                     </div> 
                     
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="inputGroupSelect07" class="">Image</label>
                             <input type="file" class="form-control" name="image">

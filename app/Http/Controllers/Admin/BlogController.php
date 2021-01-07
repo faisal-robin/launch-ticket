@@ -30,7 +30,7 @@ class BlogController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view("admin.blog.add_blog", $data);
+        return view("admin.blog.add_blog");
     }
 
     /**
