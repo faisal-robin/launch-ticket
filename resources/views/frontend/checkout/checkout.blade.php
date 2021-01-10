@@ -149,6 +149,12 @@
 </section>
 <!-- Checkout Page Area End -->
 
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
 <script>
     $('#proceedToPay').click(function () {
         $(".error_msg").html('');
@@ -158,8 +164,10 @@
             method: 'POST',
             data: data,
             success: function (response) {
-                $('#successMsg').css("display", "block").html('Customer Added Successfully.');
+                $('#successMsg').css("display", "block").html('Customer saved Successfully.');
+                $('#customerForm')[0].reset();
             }, error(data, textStatus, jqXHR) {
+                $(window).scrollTop(300);
                 var json_data = JSON.parse(data.responseText);
                 $.each(json_data.errors, function (key, value) {
                     $("#" + key).after("<span class='error_msg' style='color: red;font-weigh: 600'>" + value + "</span>");

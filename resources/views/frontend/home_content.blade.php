@@ -30,7 +30,7 @@
         <div class="banner-caption">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12 content-home">
+                    <div class="col-md-12 content-home"  id="reservationPostShow">
                         <div class="banner-welcome">
                             <h4 class="text">travel with Luxury Room</h4>
                             <div class="caption-inner">
@@ -43,7 +43,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="search-section">
+                            <div class="search-section" >
                                 <div role="tabpanel">
                                     <!-- BEGIN: CATEGORY TAB -->
                                     <ul class="nav nav-tabs search-top" role="tablist" id="searchTab">
@@ -375,7 +375,7 @@
 
 
 <!-- Blog Area Start -->
-<section class="abh-blog-area section_70">
+<section class="abh-blog-area section_70" id="blogPostShow">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

@@ -40,7 +40,7 @@
                         <label for="Name">Title</label>
                         <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title">
                     </div>
-                    <div class="form-group col-11">
+                    <div class="form-group col-12">
                         <label for="type_name">Short Summary</label>
                         <textarea class="summernote" name="short_summary" placeholder=""></textarea>                          
                     </div> 

@@ -53,9 +53,9 @@
                             <div class="mainmenu">
                                 <nav>
                                     <ul id="navigation_menu">
-                                        <li class="active"><a href="index.php">Home</a></li>
+                                        <li><a href="{{url('')}}">Home</a></li>
                                         <li>
-                                            <a href="#">RESERVATION</a>
+                                            <a style="cursor: pointer;color: black" id="reservationPost">RESERVATION</a>
                                         </li>
                                         <li>
                                             <a href="#">TOUR</a>
@@ -64,7 +64,7 @@
                                             <a href="#">RESORTS</a>
                                         </li>
                                         <li>
-                                            <a href="#">BLOG</a>
+                                            <a href="{{url('all-blogs')}}" >BLOG</a>
                                         </li>
                                     </ul>
                                 </nav>

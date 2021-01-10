@@ -32,16 +32,16 @@
 
 <!-- Smartsupp Live Chat script -->
 <script type="text/javascript">
-    $(".datepicker").datepicker({
-    changeMonth: true, 
-    changeYear: true, 
+$(".datepicker").datepicker({
+    changeMonth: true,
+    changeYear: true,
     dateFormat: 'yy-mm-dd',
     maxDate: 'today',
-    onSelect: function(dateText) {
+    onSelect: function (dateText) {
         $sD = new Date(dateText);
         $("input#DateTo").datepicker('option', 'minDate', min);
     }
-    });
+});
 var _smartsupp = _smartsupp || {};
 _smartsupp.key = 'cd7f3b02734a47c2610e70bb02c46ef98cec330f';
 window.smartsupp || (function (d) {
@@ -156,5 +156,11 @@ window.smartsupp || (function (d) {
         console.log("The country was changed: " + ctr);
         //$("#selectionSpan").text(ctr);
     }
+
+    $("#reservationPost").click(function () {
+        $('html, body').animate({
+            scrollTop: $("#reservationPostShow").offset().top
+        }, 2000);
+    });
 
 </script>

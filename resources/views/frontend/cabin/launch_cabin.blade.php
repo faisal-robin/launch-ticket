@@ -43,10 +43,12 @@
                         </div>-->
 
                         <div class="col-lg-8 offest-2" align-self-center">
-                            <form action="{{url('checkout')}}" method="GET">
+                            <!--<form action="{{url('checkout')}}" method="GET">-->
 
                         <div class="col-lg-5 align-self-center">
-                        <form action="{{ url('checkout') }}" type="post">
+                            <form action="{{ url('checkout') }}" type="post" method="post">
+                            @csrf
+                            @method('POST')
 
                             <div class="cabin-details">
                                 <div class="row">

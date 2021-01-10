@@ -31,6 +31,7 @@ class HomeController extends Controller {
         $data['all_terminal'] = Terminal::whereTerminalStatus('ACTIVE')
                 ->get();
         $data['all_blog'] = Blog::whereStatus('ACTIVE')
+                ->limit(6)
                 ->get();
         $data['all_category'] = Category::all();
 //        echo '<pre>'; 
@@ -147,6 +148,13 @@ class HomeController extends Controller {
     public function blog_details(Request $request) {
         $data['blog_data'] = Blog::find($request->id);
         return view('frontend/blog/blog_details', $data);
+    }
+    
+    public function all_blogs() {
+     $data['all_blog'] = Blog::whereStatus('ACTIVE')
+             ->limit(50)
+                ->get();  
+      return view('frontend/blog/all_blogs', $data);
     }
 
     public function checkout(Request $request) {

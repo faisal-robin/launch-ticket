@@ -110,5 +110,6 @@ Route::post('checkout', 'HomeController@checkout');
 Route::post('add-customer', 'HomeController@add_customer');
 Route::get('room-list', 'HomeController@category_wise_rooms');
 Route::get('blog', 'HomeController@blog_details');
-Route::get('checkout', 'HomeController@checkout');
+Route::get('all-blogs', 'HomeController@all_blogs');
+Route::post('checkout', 'HomeController@checkout');
 
