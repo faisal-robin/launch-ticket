@@ -5,7 +5,7 @@
 @section('home_content')
 
 
-<section class="abh-breadcrumb-area" style="background-image:url({{url('frontend/launchticket//assets/img/banner-testimonial.jpg')}})">
+<section class="abh-breadcrumb-area" style="background-image:url({{url('frontend/launchticket/assets/img/banner-testimonial.jpg')}})">
     <div class="breadcrumb-top">
         <div class="container">
             <div class="col-lg-12">
@@ -33,6 +33,8 @@
                         @csrf
                         @method('POST')
                         <div class="row checkout-form">
+                            <input type="hidden" name="r_id" value="{{$room_details->id}}">
+                            <input type="hidden" name="s_id" value="{{$schedule_details[0]->id}}">
                             <div class="col-md-6">
                                 <label for="name23">First Name</label>
                                 <input type="text" name="customer_first_name" id="customer_first_name">
@@ -160,7 +162,7 @@
         $(".error_msg").html('');
         let data = $('#customerForm').serialize();
         $.ajax({
-            url: '{{url('add-customer')}}',
+            url: '{{url('booking')}}',
             method: 'POST',
             data: data,
             success: function (response) {

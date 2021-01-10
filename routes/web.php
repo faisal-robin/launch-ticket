@@ -33,6 +33,19 @@ Route::get('user/registration', 'HomeController@user_registration');
 Route::post('user/store-registration', 'HomeController@store_registration');
 Route::get('user/login', 'HomeController@user_login');
 Route::post('user/login-check', 'HomeController@user_login_check');
+Route::get('product/{any}', 'HomeController@product_details');
+
+Route::get('get-terminal', 'HomeController@get_terminal');
+Route::get('cabin/{any}', 'HomeController@get_cabin');
+Route::post('search-schedules', 'HomeController@search_schedules');
+Route::get('rooms-by-schdule', 'HomeController@get_rooms_by_schdule');
+Route::get('room-price', 'HomeController@get_rooms_price');
+Route::post('checkout', 'HomeController@checkout');
+Route::post('booking', 'HomeController@booking');
+Route::get('room-list', 'HomeController@category_wise_rooms');
+Route::get('blog', 'HomeController@blog_details');
+Route::get('all-blogs', 'HomeController@all_blogs');
+Route::post('checkout', 'HomeController@checkout');
 
 // customer routes
 Route::group(['middleware' => 'customer_authenticate'], function() {
@@ -88,28 +101,4 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
 
 Route::get('get-states/{any}', 'Admin\CustomerController@get_states');
 
-// Route::group(['prefix' => 'cart'], function() {
-//     Route::get('cart-list', 'CartController@index');
-//     Route::get('add-to-cart', 'CartController@add_cart');
-//     Route::get('update-to-cart', 'CartController@update_cart');
-//     Route::get('delete-to-cart', 'CartController@delete_cart');
-//     Route::get('go-to-checkout', 'CartController@go_to_checkout');
-//     Route::get('checkout', 'CartController@checkout');
-//     Route::get('place-order', 'CartController@place_order');
-//     Route::get('get-cart', 'CartController@get_cart');
-// });
-//Route::get('product_info/{any}', ['as' => 'product_slug', 'jdytk' => 'HomeController@product_details']);
-Route::get('product/{any}', 'HomeController@product_details');
-
-Route::get('get-terminal', 'HomeController@get_terminal');
-Route::get('cabin/{any}', 'HomeController@get_cabin');
-Route::post('search-schedules', 'HomeController@search_schedules');
-Route::get('rooms-by-schdule', 'HomeController@get_rooms_by_schdule');
-Route::get('room-price', 'HomeController@get_rooms_price');
-Route::post('checkout', 'HomeController@checkout');
-Route::post('add-customer', 'HomeController@add_customer');
-Route::get('room-list', 'HomeController@category_wise_rooms');
-Route::get('blog', 'HomeController@blog_details');
-Route::get('all-blogs', 'HomeController@all_blogs');
-Route::post('checkout', 'HomeController@checkout');
 

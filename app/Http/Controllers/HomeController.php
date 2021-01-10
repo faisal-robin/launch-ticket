@@ -168,22 +168,30 @@ class HomeController extends Controller {
         return view('frontend/checkout/checkout', $data);
     }
 
-    public function add_customer(Request $request) {
+    public function booking(Request $request) {
+
         $validationArray['customer_first_name'] = 'required';
         $validationArray['customer_last_name'] = 'required';
-        $validationArray['customer_email'] = 'required|unique:customers|email';
-        $validationArray['customer_phone'] = 'required|unique:customers';
+        $validationArray['customer_email'] = 'required|email';
+        $validationArray['customer_phone'] = 'required';
         $this->validate($request, $validationArray);
-        $data['customer_first_name'] = $request->input('customer_first_name');
-        $data['customer_last_name'] = $request->input('customer_last_name');
-        $data['customer_postal_code'] = "";
-        $data['customer_code'] = "";
-        $data['password'] = "";
-        $data['customer_email'] = $request->input('customer_email');
-        $data['customer_phone'] = $request->input('customer_phone');
-        $data['customer_address'] = $request->input('customer_address');
-        $data['customer_status'] = 1;
-        Customer::insert($data);
+        
+
+        $customer = new Customer;
+
+        $customer->customer_first_name = $request->customer_first_name;
+        $customer->customer_last_name = $request->customer_last_name;
+        $customer->customer_email = $request->customer_email;
+        $customer->customer_address = $request->customer_address;
+        $customer->customer_email = $request->customer_email;
+        $customer->customer_status = 1;
+        
+        echo "<pre>";print_r($customer);die();
+        $customer->save();
+        // $data['customer_postal_code'] = "";
+        // $data['customer_code'] = "";
+        // $data['password'] = "";
+
     }
 
 }
