@@ -186,7 +186,11 @@ class HomeController extends Controller {
         $customer->customer_email = $request->customer_email;
         $customer->customer_status = 1;
         
-        echo "<pre>";print_r($customer);die();
+
+        echo "<pre>";print_r($request->r_id);
+        echo "<pre>";print_r($request->s_id);
+
+        die();
         $customer->save();
         // $data['customer_postal_code'] = "";
         // $data['customer_code'] = "";

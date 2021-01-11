@@ -167,7 +167,7 @@
             data: data,
             success: function (response) {
                 $('#successMsg').css("display", "block").html('Customer saved Successfully.');
-                $('#customerForm')[0].reset();
+                // $('#customerForm')[0].reset();
             }, error(data, textStatus, jqXHR) {
                 $(window).scrollTop(300);
                 var json_data = JSON.parse(data.responseText);
