@@ -33,8 +33,8 @@
                         @csrf
                         @method('POST')
                         <div class="row checkout-form">
-                            <input type="hidden" name="r_id" value="{{$room_details->id}}">
-                            <input type="hidden" name="s_id" value="{{$schedule_details[0]->id}}">
+                            <input type="hidden" id="r_id" name="r_id" value="{{$room_details->id}}">
+                            <input type="hidden" id="s_id" name="s_id" value="{{$schedule_details[0]->id}}">
                             <div class="col-md-6">
                                 <label for="name23">First Name</label>
                                 <input type="text" name="customer_first_name" id="customer_first_name">
@@ -121,15 +121,16 @@
                 </div>
                 <div class="booking-right">
                     <div class="abh-payment clearfix">
+                        <br>
                         <div class="payment">
-                            <button class="your-button-class" id="sslczPayBtn"
+                            <button style="width: 100%" class="your-button-class" id="sslczPayBtn"
                                     token="if you have any token validation"
-                                    postdata="your javascript arrays or objects which requires in backend"
+                                    postdata=""
                                     order="If you already have the transaction generated for current order"
                                     endpoint="{{url('pay-via-ajax')}}"> Pay Now
                             </button>
                         </div>
-                        <div class="payment">
+                        <!-- <div class="payment">
                             <input type="radio" id="ss-option" name="selector">
                             <label for="ss-option">BKash</label>
                             <div class="check">
@@ -144,14 +145,14 @@
                                 <div class="inside"></div>
                             </div>
                             <img src="assets/img/master-card.jpg" alt="credit card">
-                        </div>
+                        </div> -->
 
                     </div>
-                    <div id="successMsg" class="text-center p-2" style="color: white;height: 35px;background-color: graytext;display: none"></div>
+                    <!-- <div id="successMsg" class="text-center p-2" style="color: white;height: 35px;background-color: graytext;display: none"></div>
                     <div class="action-btn">
                         <button style="cursor: grab" class="abh-btn" id="proceedToPay">Proceed to Pay</button>
-                        <!--<a class="abh-btn" id="proceedToPay">Proceed to Pay</a>-->
-                    </div>
+                        <a class="abh-btn" id="proceedToPay">Proceed to Pay</a>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -165,7 +166,7 @@
     }
 </style>
 
-<script>
+<!-- <script>
     $('#proceedToPay').click(function () {
         $(".error_msg").html('');
         let data = $('#customerForm').serialize();
@@ -185,15 +186,33 @@
             }
         });
     });
+<<<<<<< HEAD
 </script>
 <script>
+=======
+</script> -->
+<script>
+
+    $("#sslczPayBtn").click(function () {
+        var obj = {};
+        obj.customer_first_name = $('#customer_first_name').val();
+        obj.customer_last_name = $('#customer_last_name').val();
+        obj.customer_address = $('#customer_address').val();
+        obj.customer_email = $('#customer_email').val();
+        obj.customer_phone = $('#customer_phone').val();
+        obj.r_id = $('#r_id').val();
+        obj.s_id = $('#s_id').val();
+        $('#sslczPayBtn').prop('postdata', obj);
+    });
+
+
     (function (window, document) {
         var loader = function () {
             var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+            // script.src = "https://seamless-epay.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7); // USE THIS FOR LIVE
+            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7); // USE THIS FOR SANDBOX
             tag.parentNode.insertBefore(script, tag);
         };
-
         window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
     })(window, document);
 </script>
