@@ -122,6 +122,14 @@
                 <div class="booking-right">
                     <div class="abh-payment clearfix">
                         <div class="payment">
+                            <button class="your-button-class" id="sslczPayBtn"
+                                    token="if you have any token validation"
+                                    postdata="your javascript arrays or objects which requires in backend"
+                                    order="If you already have the transaction generated for current order"
+                                    endpoint="{{url('pay-via-ajax')}}"> Pay Now
+                            </button>
+                        </div>
+                        <div class="payment">
                             <input type="radio" id="ss-option" name="selector">
                             <label for="ss-option">BKash</label>
                             <div class="check">
@@ -182,5 +190,15 @@
 
 
 </script>
+<script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+            tag.parentNode.insertBefore(script, tag);
+        };
 
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
 @endsection
