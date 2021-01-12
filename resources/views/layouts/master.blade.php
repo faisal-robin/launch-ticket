@@ -51,7 +51,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="{{ asset('public/admin_asset/js/dropzone.js') }}"></script>
         <link href="{{ asset('public/admin_asset/css/jquery-ui.css') }}" rel="stylesheet">
         <link href="{{ asset('public/admin_asset/css/custom.css') }}" rel="stylesheet">
-
+        <link rel="stylesheet" href="{{ asset('public/admin_asset/')}}/plugins/fullcalendar/main.min.css">
+        <link rel="stylesheet" href="{{ asset('public/admin_asset/')}}/plugins/fullcalendar-daygrid/main.min.css">
+        <link rel="stylesheet" href="{{ asset('public/admin_asset/')}}/plugins/fullcalendar-timegrid/main.min.css">
+        <link rel="stylesheet" href="{{ asset('public/admin_asset/')}}/plugins/fullcalendar-bootstrap/main.min.css">
     </head>
     <body class="hold-transition sidebar-mini">
         <div class="wrapper">
@@ -157,8 +160,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             @endif
-                            
-                             <li class="nav-item">
+
+                            <li class="nav-item">
                                 <a href="{{url('admin/blogs')}}" class="nav-link">
                                     <i class="fas fa-users-cog nav-icon"></i>
                                     <p>
@@ -230,16 +233,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <a href="{{url('admin/categories')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                               Room Category
+                                                Room Category
                                             </p>
                                         </a>
                                     </li>
-                                    
+
                                     <li class="nav-item">
                                         <a href="{{url('admin/rooms')}}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                               Room
+                                                Room
                                             </p>
                                         </a>
                                     </li>
@@ -277,7 +280,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <li class="nav-item">
                                 <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
-                                   document.getElementById('logout-form').submit();">
+document.getElementById('logout-form').submit();">
                                     <i class="nav-icon fas fa-sign-out-alt"></i>
                                     <p>
                                         {{ __('Logout') }}
@@ -366,20 +369,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <script src="{{ asset('public/admin_asset/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('public/admin_asset/js/summernote-bs4.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('public/admin_asset/') }}/plugins/moment/moment.min.js"></script>
+        <script src="{{ asset('public/admin_asset/') }}/plugins/fullcalendar/main.min.js"></script>
+        <script src="{{ asset('public/admin_asset/') }}/plugins/fullcalendar-daygrid/main.min.js"></script>
+        <script src="{{ asset('public/admin_asset/') }}/plugins/fullcalendar-timegrid/main.min.js"></script>
+        <script src="{{ asset('public/admin_asset/') }}/plugins/fullcalendar-interaction/main.min.js"></script>
+        <script src="{{ asset('public/admin_asset/') }}/plugins/fullcalendar-bootstrap/main.min.js"></script>
 
         <script>
 $(document).ready(function() {
 $('.select2').select2();
 $('.datepicker').datetimepicker({
 format: 'YYYY-MM-DD'
-        });
+});
 $('.timepicker').datetimepicker({
 format: 'LT',
         icons: {
         up: 'fa fa-angle-up',
                 down: 'fa fa-angle-down'
         },
-        });
+});
 $('#summernote').summernote({
 placeholder: 'Hello Bootstrap 4',
         tabsize: 2,
@@ -391,7 +400,7 @@ placeholder: 'Hello Bootstrap 4',
         }
         }
         },
-        });
+});
 $('#summernote1').summernote({
 placeholder: 'Hello Bootstrap 4',
         tabsize: 2,
@@ -403,7 +412,7 @@ placeholder: 'Hello Bootstrap 4',
         }
         }
         },
-        });
+});
 $('.summernote').summernote({
 placeholder: 'Hello Bootstrap 4',
         tabsize: 2,
@@ -415,7 +424,7 @@ placeholder: 'Hello Bootstrap 4',
         }
         }
         },
-        });
+});
 });
 $.upload = function (file) {
 let out = new FormData();
@@ -425,9 +434,9 @@ console.log(file.name);
 $.ajax({
 headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
+},
         method: 'POST',
-        url: '{{url('summurnote-image-upload')}}',
+        url: '{{url('summurnote - image - upload')}}',
         contentType: false,
         cache: false,
         processData: false,
@@ -450,7 +459,7 @@ console.log(file.name);
 $.ajax({
 headers: {
 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
+},
         method: 'POST',
         url: '{{url('summurnote - image - upload')}}',
         contentType: false,
@@ -471,7 +480,7 @@ $('#example1').DataTable();
 //Timepicker
 $('.timepicker').timepicker({
 showInputs: false
-        })
+})
         </script>
     </body>
 </html>
