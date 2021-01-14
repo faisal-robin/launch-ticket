@@ -186,6 +186,10 @@
             }
         });
     });
+<<<<<<< HEAD
+</script>
+<script>
+=======
 </script> -->
 <script>
 
@@ -200,6 +204,7 @@
         obj.s_id = $('#s_id').val();
         $('#sslczPayBtn').prop('postdata', obj);
     });
+
 
     (function (window, document) {
         var loader = function () {
