@@ -174,7 +174,7 @@ class SslCommerzPaymentController extends Controller
         $update_product = DB::table('bookings')
             ->where('transaction_id', $post_data['tran_id'])
             ->updateOrInsert([
-                'customer_id' => $customer_id->id,
+                'customer_id' => $customer->id,
                 'customer_name' => $request_data['customer_first_name'].' '.$request_data['customer_last_name'],
                 'booking_grand_total' => $post_data['total_amount'],
                 'status' => 'Pending',
@@ -191,7 +191,7 @@ class SslCommerzPaymentController extends Controller
                         ->where('transaction_id', $post_data['tran_id'])
                         ->select('id')
                         ->first();
-        
+        $post_data['booking_id'] = $booking_id->id;
         // echo "<pre>";print_r($booking_id->id);die();
         
         $booking_data['booking_id'] = $booking_id->id;
@@ -221,6 +221,7 @@ class SslCommerzPaymentController extends Controller
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
         $currency = $request->input('currency');
+        $booking_id = $request->input('booking_id');
 
         $sslc = new SslCommerzNotification();
 
@@ -241,6 +242,33 @@ class SslCommerzPaymentController extends Controller
                 $update_product = DB::table('bookings')
                     ->where('transaction_id', $tran_id)
                     ->update(['status' => 'Processing']);
+
+
+                    echo "<pre>";print_r('sdfasd');die();
+                    $booking_info = DB::table('bookings')
+                        ->where('bookings.id', $booking_id)
+                        ->leftJoin('booking_details','booking_details.booking_id','=','bookings.id')
+                        ->leftJoin('launch_schedules','launch_schedules.id','=','booking_details.launch_schedule_id')
+                        ->leftJoin('rooms','rooms.id','=','booking_details.launch_room_id')
+                        ->select('bookings.*','launch_schedules.*','rooms.room_no','booking_details.booking_room_price')
+                        ->get();
+
+                    
+                    // $data["email"] = "aatmaninfotech@gmail.com";
+                    // $data["title"] = "From ItSolutionStuff.com";
+                    // $data["body"] = "This is Demo";
+
+                    $pdf = PDF::loadView('frontend.pdf.document', $data);
+
+                    
+                    Mail::send('frontend.pdf.document', $data, function($message)use($data, $pdf) {
+
+                        $message->to($data["email"], $data["email"])
+
+                        ->subject($data["title"])
+
+                        ->attachData($pdf->output(), "text.pdf");
+                    });
 
                 echo "<br >Transaction is successfully Completed";
             } else {

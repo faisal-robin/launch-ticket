@@ -14,7 +14,7 @@ use App\Models\Room;
 use App\Models\Category;
 use App\Models\State;
 use App\Models\Blog;
-
+use PDF;
 class HomeController extends Controller {
 
     /**
@@ -166,6 +166,18 @@ class HomeController extends Controller {
                 ->get();
 //        echo '<pre>'; print_r($data['schedule_details']);die;
         return view('frontend/checkout/checkout', $data);
+    }
+
+
+   
+
+    public function generate_pdf() 
+    {
+        $data = [
+            'foo' => 'bar'
+        ];
+        $pdf = PDF::loadView('frontend.pdf.document', $data);
+        return $pdf->stream('document.pdf');
     }
 
     public function booking(Request $request) {

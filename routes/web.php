@@ -46,6 +46,7 @@ Route::get('room-list', 'HomeController@category_wise_rooms');
 Route::get('blog', 'HomeController@blog_details');
 Route::get('all-blogs', 'HomeController@all_blogs');
 Route::post('checkout', 'HomeController@checkout');
+Route::get('pdf', 'HomeController@generate_pdf');
 
 // customer routes
 Route::group(['middleware' => 'customer_authenticate'], function() {
