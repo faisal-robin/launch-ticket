@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-
+<h4 style="text-align: center;color: black;padding-left: 40%">Launch Schedules</h4><br><br><br>
 <div class="col-md-3">
-    
+
     <div class="sticky-top mb-3 hide" style="display: none">
 
         <div class="card">
@@ -58,7 +58,7 @@
         </div>
 
     </div>
-    
+
 </div>
 
 <!-- /.col -->
@@ -165,10 +165,10 @@
 
         let schedules = getSchedules();
         $.each(schedules, function (key, val) {
-            let link = 'admin/launch-schedules/'+val.id+'/edit';
-            let sendLink = '<a href="'+link+'>'+val.launch_name+'</a>'; 
+            let link = 'launch-schedules/'+val.id+'/edit';
             let pushVal = {
-                title: sendLink,
+                title: val.launch_name,
+                url: link,
                 start: new Date(val.schedule_date),
                 backgroundColor: '#f56954', //red
                 borderColor: '#f56954', //red
@@ -178,8 +178,6 @@
         });
 
 //        console.log(schedules);
-
-
 
         var calendar = new Calendar(calendarEl, {
 
@@ -192,7 +190,13 @@
             'themeSystem': 'bootstrap',
 //Random default events
             events: setEvents,
-            
+            eventClick: function (info) {
+                info.jsEvent.preventDefault(); // don't let the browser navigate
+
+                if (info.event.url) {
+                    window.open(info.event.url);
+                }
+            },
             selectable: true,
             selectHelper: true,
             editable: true,
