@@ -100,6 +100,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('edit-company-data', 'Admin\AdminController@edit_company_data');
     
     Route::get('get-launch-schedules', 'Admin\LaunchScheduleController@get_launch_schedules');
+    Route::resource('bookings', 'Admin\BookingController');
 });
 
 Route::get('get-states/{any}', 'Admin\CustomerController@get_states');

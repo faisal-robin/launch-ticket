@@ -79,17 +79,17 @@
         <tr>
             <td width="49%" style=" color:#000">
             
-                <p><b>Booking No: #123456</b></p>
-                <p>Booked On: 12-12-2020</p>
-                <p>Journey Date: 12-12-2020</p>
-                <p>Departure Time: 8.00 PM</p>
+                <p><b>Booking No: {{$booking_info[0]->booking_code}}</b></p>
+                <p>Booked On: {{$booking_info[0]->booking_date}}</p>
+                <p>Journey Date: {{$booking_info[0]->schedule_date}}</p>
+                <p>Departure Time: {{$booking_info[0]->schedule_time}}</p>
             </td>
             <td width="2%">&nbsp;</td>
             <td width="49%" style="color:#000">
-            <p><b>Faisal Robin</b></p>
-                <p>Chittagong, Bangladesh</p>
-                <p>01819545997</p>
-                <p>faisalrobin22@gmail.com</p>
+            <p><b>{{$booking_info[0]->customer_name}}</b></p>
+                <p>{{$booking_info[0]->customer_address}}</p>
+                <p>{{$booking_info[0]->customer_phone}}</p>
+                <p>{{$booking_info[0]->customer_email}}</p>
             </td>
         </tr>
     </table>
@@ -107,14 +107,18 @@
         </thead>
         <tbody>
             <!-- ITEMS HERE -->
+            @php $total = 0; @endphp
+            @foreach($booking_info as $key => $value) 
+            @php  $total += $value->booking_room_price; @endphp
             <tr style="background-color: #eee">
                 <td style="line-height: 20px;">1</td>
-                <td style="line-height: 20px;">Manami</td>
-                <td style="line-height: 20px;">M-123</td>
-                <td style="line-height: 20px;">Dhaka</td>
-                <td style="line-height: 20px;">Barisal</td>
-                <td style="line-height: 20px;">1000</td>
+                <td style="line-height: 20px;">{{$value->launch_name}}</td>
+                <td style="line-height: 20px;">{{$value->room_no}}</td>
+                <td style="line-height: 20px;">{{$value->terminal_from}}</td>
+                <td style="line-height: 20px;">{{$value->terminal_to}}</td>
+                <td style="line-height: 20px;">{{$value->booking_room_price}}</td>
             </tr>
+            @endforeach 
         </tbody>
     </table>
     
@@ -129,11 +133,11 @@
                 <table width="40%" align="right" style="font-family: sans-serif; font-size: 14px;" >
                     <tr>
                         <td style="border: 2px #eee solid; padding: 0px 8px; line-height: 20px;"><strong>Total Fare</strong></td>
-                        <td style="border: 2px #eee solid; padding: 0px 8px; line-height: 20px;">1000.00</td>
+                        <td style="border: 2px #eee solid; padding: 0px 8px; line-height: 20px;">{{$total}}</td>
                     </tr>
                     <tr>
                         <td style="border: 2px #eee solid; padding: 0px 8px; line-height: 20px;"><strong>Transaction ID</strong></td>
-                        <td style="border: 2px #eee solid; padding: 0px 8px; line-height: 20px;">TR1232345</td>
+                        <td style="border: 2px #eee solid; padding: 0px 8px; line-height: 20px;">{{$booking_info[0]->transaction_id}}</td>
                     </tr>
                     <tr>
                         <td style="border: 2px #eee solid; padding: 0px 8px; line-height: 20px;"><strong>Status</strong></td>

@@ -139,6 +139,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a href="{{url('admin/bookings')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+
+                                    <p>
+                                        Booking
+                                    </p>
+                                </a>
+                            </li>
+
                             @if($user->can('view-user'))
                             <li class="nav-item">
                                 <a href="{{url('admin/users')}}" class="nav-link">

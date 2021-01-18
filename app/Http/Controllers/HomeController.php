@@ -159,12 +159,15 @@ class HomeController extends Controller {
 
     public function checkout(Request $request) {
 //        echo $request->category.'room'.$request->room.'boarding-point'.$request->boarding_point;die;
+
+       // echo "<pre>";print_r($request->schedule);die();
         $data['room_details'] = Room::find($request->room);
         $data['boarding_terminal'] = Terminal::find($request->boarding_point);
         $data['schedule_details'] = LaunchSchedule::where('launch_schedules.id', $request->schedule)
                 ->join('terminals', 'launch_schedules.terminal_from', '=', 'terminals.id')
+                ->select('launch_schedules.*','launch_schedules.id as s_id')
                 ->get();
-//        echo '<pre>'; print_r($data['schedule_details']);die;
+        // echo '<pre>'; print_r($data['schedule_details']);die;
         return view('frontend/checkout/checkout', $data);
     }
 

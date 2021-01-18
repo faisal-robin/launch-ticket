@@ -294,7 +294,6 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->data['currency'] = $info['currency']; // string (3)	Mandatory - The currency type must be mentioned. It shall be three characters. Example : BDT, USD, EUR, SGD, INR, MYR, etc. If the transaction currency is not BDT, then it will be converted to BDT based on the current convert rate. Example : 1 USD = 82.22 BDT.
         $this->data['tran_id'] = $info['tran_id']; // string (30)	Mandatory - Unique transaction ID to identify your order in both your end and SSLCommerz
         $this->data['product_category'] = $info['product_category']; // string (50)	Mandatory - Mention the product category. It is a open field. Example - clothing,shoes,watches,gift,healthcare, jewellery,top up,toys,baby care,pants,laptop,donation,etc
-        $this->data['booking_id'] = $info['booking_id'];
 
         // Set the SUCCESS, FAIL, CANCEL Redirect URL before setting the other parameters
         $this->setSuccessUrl();

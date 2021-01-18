@@ -24,7 +24,6 @@
 <!-- Checkout Page Area Start -->
 <section class="checkout-page-area section_70">
     <div class="container">
-
         <div class="row">
             <div class="col-lg-8">
                 <div class="checkout-left-box">

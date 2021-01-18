@@ -200,7 +200,7 @@ class SslCommerzPaymentController extends Controller
         $booking_data['booking_room_price'] = $post_data['total_amount'];
         $booking_data['created_at'] = date_create();
         $booking_data['updated_at'] = date_create();
-
+        
         DB::table('booking_details')->insert($booking_data);
 
         $sslc = new SslCommerzNotification();
@@ -228,8 +228,6 @@ class SslCommerzPaymentController extends Controller
         #Check order status in order tabel against the transaction id or order id.
         $order_detials = DB::table('bookings')
             ->where('transaction_id', $tran_id)
-
-
             ->select('transaction_id', 'status', 'currency', 'booking_grand_total')->first();
 
 
@@ -244,18 +242,20 @@ class SslCommerzPaymentController extends Controller
                 */
                 $update_product = DB::table('bookings')
                     ->where('transaction_id', $tran_id)
-                    ->update(['booking_status' => 'Processing']);
+                    ->update(['status' => 'Processing']);
 
 
-                    echo "<pre>";print_r('sdfasd');die();
-                    $booking_info = DB::table('bookings')
-                        ->where('bookings.id', $booking_id)
+                    
+                    $data['booking_info'] = DB::table('bookings')
+                        ->where('bookings.transaction_id', $tran_id)
+                        ->leftJoin('customers','customers.id','=','bookings.customer_id')
                         ->leftJoin('booking_details','booking_details.booking_id','=','bookings.id')
                         ->leftJoin('launch_schedules','launch_schedules.id','=','booking_details.launch_schedule_id')
                         ->leftJoin('rooms','rooms.id','=','booking_details.launch_room_id')
-                        ->select('bookings.*','launch_schedules.*','rooms.room_no','booking_details.booking_room_price')
+                        ->select('bookings.*','bookings.id as b_id','launch_schedules.*','launch_schedules.id as s_id','rooms.room_no','booking_details.booking_room_price','customers.customer_email','customers.customer_phone','customers.customer_address')
                         ->get();
 
+                    // echo "<pre>";print_r($data['booking_info']);die();
                     
                     // $data["email"] = "aatmaninfotech@gmail.com";
                     // $data["title"] = "From ItSolutionStuff.com";
