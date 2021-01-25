@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Customer;
 use PDF;
+use Mail;
 class SslCommerzPaymentController extends Controller
 {
 
@@ -282,7 +283,7 @@ class SslCommerzPaymentController extends Controller
                         ->attachData($pdf->output(), "text.pdf");
                     });
 
-                echo "<br >Transaction is successfully Completed";
+                 return redirect('success');
             } else {
                 /*
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.
@@ -297,7 +298,7 @@ class SslCommerzPaymentController extends Controller
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
-            echo "Transaction is successfully Completed";
+            return redirect('success');
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
             echo "Invalid Transaction";

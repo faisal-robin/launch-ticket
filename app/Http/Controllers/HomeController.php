@@ -182,6 +182,11 @@ class HomeController extends Controller {
         return $pdf->stream('document.pdf');
     }
 
+    public function booking_success(){
+
+         return view('frontend/checkout/booking_success');
+    }
+
     public function booking(Request $request) {
 
         $validationArray['customer_first_name'] = 'required';

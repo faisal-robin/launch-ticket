@@ -47,6 +47,7 @@ Route::get('blog', 'HomeController@blog_details');
 Route::get('all-blogs', 'HomeController@all_blogs');
 Route::post('checkout', 'HomeController@checkout');
 Route::get('pdf', 'HomeController@generate_pdf');
+Route::get('booking/success', 'HomeController@booking_success');
 
 // customer routes
 Route::group(['middleware' => 'customer_authenticate'], function() {
