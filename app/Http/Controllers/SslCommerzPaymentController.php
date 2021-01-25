@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Customer;
+use PDF;
 class SslCommerzPaymentController extends Controller
 {
 
@@ -252,9 +253,17 @@ class SslCommerzPaymentController extends Controller
                         ->leftJoin('booking_details','booking_details.booking_id','=','bookings.id')
                         ->leftJoin('launch_schedules','launch_schedules.id','=','booking_details.launch_schedule_id')
                         ->leftJoin('rooms','rooms.id','=','booking_details.launch_room_id')
-                        ->select('bookings.*','bookings.id as b_id','launch_schedules.*','launch_schedules.id as s_id','rooms.room_no','booking_details.booking_room_price','customers.customer_email','customers.customer_phone','customers.customer_address')
+                        ->select('bookings.*','bookings.id as b_id','launch_schedules.*','launch_schedules.id as s_id','rooms.room_no','rooms.id as r_id','booking_details.booking_room_price','customers.customer_email','customers.customer_phone','customers.customer_address')
                         ->get();
+                    
+                        foreach ($data['booking_info'] as $key => $value) {
 
+                            DB::table('launch_schedule_item')
+                            ->where('schedule_id', $value->s_id)
+                            ->where('room_id', $value->r_id)
+                            ->update(['status' => 'BOOKED']);
+                        }
+                    
                     // echo "<pre>";print_r($data['booking_info']);die();
                     
                     // $data["email"] = "aatmaninfotech@gmail.com";

@@ -72,7 +72,6 @@ class HomeController extends Controller {
             'departure_date' => 'required'
         ]);
 
-        $data['all_slider'] = Slider::all();
         $date = str_replace('/', '-', $request->departure_date);
         $data['launch_schedules'] = [];
 
@@ -108,7 +107,7 @@ class HomeController extends Controller {
     public function get_rooms_by_schdule(Request $request) {
         $schedule_rooms = DB::table('launch_schedule_item')
                 ->join('rooms', 'launch_schedule_item.room_id', '=', 'rooms.id')
-                ->where(['launch_schedule_item.schedule_id' => $request->schedule_id, 'rooms.main_category' => $request->category_id])
+                ->where(['launch_schedule_item.schedule_id' => $request->schedule_id, 'rooms.main_category' => $request->category_id, 'launch_schedule_item.status' => 'AVAILABLE'])
                 ->get();
         $html = '';
         $html .= '<option value="">Select Cabin</option>';

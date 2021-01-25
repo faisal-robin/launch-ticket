@@ -101,19 +101,19 @@
                             </tr>
                             <tr>
                                 <td>Launch Ticket Fee</td>
-                                <td>৳ 50</td>
+                                <td>৳ 00</td>
                             </tr>
                             <tr>
                                 <td>Delivery Charge</td>
-                                <td>৳ 0</td>
+                                <td>৳ 00</td>
                             </tr>
                             <tr>
                                 <td>Discount</td>
-                                <td>৳ 0</td>
+                                <td>৳ 00</td>
                             </tr>
                             <tr>
                                 <td>Total</td>
-                                <td>৳ 1050</td>
+                                <td>৳ {{$room_details->sell_price}}</td>
                             </tr>
                         </tbody>
                     </table>
