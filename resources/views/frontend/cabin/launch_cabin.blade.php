@@ -42,10 +42,13 @@
                             </table>
                         </div>-->
 
-                        <div class="col-lg-8 offest-2" align-self-center">
-                            <!--<form action="{{url('checkout')}}" method="GET">-->
+                        <!-- <div class="col-lg-12">
+                            <form action="{{url('checkout')}}" method="GET">
 
-                        <div class="col-lg-5 align-self-center">
+                        
+
+                    </div> -->
+                    <div class="col-lg-8 offset-2">
                             <form action="{{ url('checkout') }}" type="post" method="post">
                             @csrf
                             @method('POST')
@@ -99,14 +102,12 @@
                             </div>
                             </form>
                         </div>
-
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 <script>
     $("#category_info").change(function () {
         let schedule_id = <?php echo $schedule_id?>;

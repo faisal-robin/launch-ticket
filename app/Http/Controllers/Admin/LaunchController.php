@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 //use Faker\Provider\Image;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use App\Models\launch;
+use App\Models\Launch;
 use Illuminate\Http\Request;
 
 class LaunchController extends Controller

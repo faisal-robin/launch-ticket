@@ -4,7 +4,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="footer-logo">
                     <a href="index.html">
-                        <img src="{{asset('storage')}}/app/@isset(company_info()->company_thumbnail){{company_info()->company_thumbnail}}@endisset" alt="abh" />
+                        <img src="{{asset('public')}}/frontend_asset/img/footer-logo.png" alt="abh" />
                     </a>
                 </div>
                 <!-- <div class="single-footer">
@@ -40,7 +40,7 @@
                     <h3>Pay Safely</h3>
                     <p>Eiusmod tempor incididunt utbor etian dolm magna aliqua enim minim</p>
                     <div class="payment_image">
-                        <img src="assets/img/creditcard-logo.png" alt="Payment Card" />
+                        <img src="{{asset('public')}}/frontend_asset/img/creditcard-logo.png" alt="Payment Card" />
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-6">
                             <div class="footer-bottom-left">
-                                <p>&copy; Copyright abh - By <a href="#">ABH World</a></p>
+                                <p>&copy; Copyright - By <a href="#">M360 ICT</a></p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6">

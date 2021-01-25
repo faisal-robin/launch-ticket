@@ -45,7 +45,7 @@ class AdminController extends Controller {
             $path = $request->file('company_image')->store('company');
             $data['company_image'] = $path;           
             $file = $request->file('company_image')->hashName();
-            $resize = Image::make($request->file('company_image'))->resize(180, 35, function ($constraint) {
+            $resize = Image::make($request->file('company_image'))->resize(205, 60, function ($constraint) {
                         
                     })->encode('jpg');
            
