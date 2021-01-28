@@ -113,8 +113,8 @@
             <tr style="background-color: #eee">
                 <td style="line-height: 20px;">1</td>
                 <td style="line-height: 20px;">{{$value->launch_name}}</td>
-                <td style="line-height: 20px;">{{$value->room_no}}
-                </td style="line-height: 20px;">
+                <td style="line-height: 20px;">{{$value->room_no}}</td>
+                <td style="line-height: 20px;">
                 <?php  $terminal_from = DB::table('terminals')->select('terminal_name')->where('id',$value->terminal_from)->first(); 
                 echo  $terminal_from->terminal_name;
                 ?>
